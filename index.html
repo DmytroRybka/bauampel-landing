@@ -3,15 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>BauAmpel — Schluss mit Leerfahrten. Einsatz-Koordination für Bau &amp; Handwerk.</title>
+    <title>BauAmpel — KI-gestützter Kundendienst für Bau &amp; Handwerk. Anfragen schneller beantwortet.</title>
     <meta
       name="description"
-      content="BauAmpel prüft Zugang, Material und Vorgewerke, bevor die Kolonne fährt. Ampel-Board gegen Leerfahrten, mobile Kolonnen-Berichte, rechtssichere Antwortentwürfe und E-Mail-Posteingang — für Bauunternehmen und Handwerksbetriebe in der DACH-Region."
+      content="BauAmpel bündelt Ihre Kundenkommunikation an einem Ort: E-Mails automatisch zugeordnet, rechtssichere KI-Antwortentwürfe mit menschlicher Freigabe, aus jeder Reklamation ein geplanter Einsatz — und dadurch weniger teure Leerfahrten. Für Bauunternehmen und Handwerksbetriebe in der DACH-Region."
     />
-    <meta property="og:title" content="BauAmpel — Schluss mit Leerfahrten" />
+    <meta property="og:title" content="BauAmpel — KI-gestützter Kundendienst für Bau &amp; Handwerk" />
     <meta
       property="og:description"
-      content="Jede Kolonne fährt nur los, wenn die Ampel grün ist. BauAmpel prüft Zugang, Material und Vorgewerke — bevor die Kolonne fährt."
+      content="Kundenanfragen schneller beantwortet, Probleme sauber gelöst: automatische Zuordnung, rechtssichere KI-Antwortentwürfe mit Freigabe, aus jeder Reklamation ein vorbereiteter Einsatz — und weniger Leerfahrten."
     />
     <meta property="og:type" content="website" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
@@ -457,10 +457,129 @@
       .i-gelb  { background: var(--ampel-gelb); }
       .i-rot   { background: var(--ampel-rot); }
       .i-grau  { background: var(--navy-200); }
+      /* hero support-inbox workspace (two columns inside the main pane) */
+      .mockup__work {
+        margin-top: 10px;
+        display: grid;
+        grid-template-columns: minmax(0, 47fr) minmax(0, 53fr);
+        gap: 10px;
+      }
+      .inbox-item {
+        padding: 8px 10px;
+        border-radius: 7px;
+        background: #fff;
+        border: 1px solid var(--navy-100);
+        border-left-width: 4px;
+      }
+      .inbox-item + .inbox-item { margin-top: 6px; }
+      .inbox-item--neu { border-left-color: var(--ampel-rot); }
+      .inbox-item--ueber { border-left-color: var(--navy-300); }
+      .inbox-item .top-line {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6px;
+      }
+      .inbox-item .subj {
+        font-size: 10.5px;
+        font-weight: 600;
+        color: var(--navy-900);
+      }
+      .inbox-item .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        flex-shrink: 0;
+        font-size: 8.5px;
+        font-weight: 600;
+        color: var(--navy-500);
+      }
+      .inbox-item .status i {
+        width: 7px; height: 7px; border-radius: 9999px; font-style: normal;
+      }
+      .inbox-item .match {
+        margin-top: 5px;
+        display: inline-block;
+        padding: 1px 8px;
+        border-radius: 9999px;
+        background: rgba(48, 164, 108, 0.12);
+        color: #1E7A4D;
+        font-size: 8.5px;
+        font-weight: 600;
+      }
+      .draft-card {
+        padding: 10px 11px;
+        border-radius: 7px;
+        background: #fff;
+        border: 1px solid rgba(0, 82, 204, 0.22);
+      }
+      .draft-card .kipill {
+        display: inline-block;
+        padding: 1px 8px;
+        border-radius: 9999px;
+        background: var(--action);
+        color: #fff;
+        font-size: 8.5px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .draft-card .draft-subj {
+        margin-top: 7px;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--navy-900);
+      }
+      .draft-card .draft-body {
+        margin-top: 6px;
+        font-size: 9.5px;
+        line-height: 1.5;
+        color: var(--navy-600);
+      }
+      .draft-card .draft-body p + p { margin-top: 3px; }
+      .draft-card .draft-warn {
+        margin-top: 8px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 8px;
+        border-radius: 6px;
+        background: rgba(245, 166, 35, 0.13);
+        color: #9A6700;
+        font-size: 9px;
+        font-weight: 600;
+      }
+      .draft-card .draft-warn .blip {
+        width: 7px; height: 7px; border-radius: 9999px;
+        background: var(--ampel-gelb); flex-shrink: 0;
+      }
+      .draft-card .draft-actions {
+        margin-top: 9px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .draft-card .btn-freigeben {
+        padding: 5px 12px;
+        border-radius: 6px;
+        background: var(--action);
+        color: #fff;
+        font-size: 9.5px;
+        font-weight: 700;
+      }
+      .draft-card .chip-improve {
+        padding: 4px 9px;
+        border-radius: 9999px;
+        background: var(--navy-100);
+        color: var(--navy-600);
+        font-size: 9px;
+        font-weight: 600;
+      }
       @media (max-width: 560px) {
         .mockup__body { grid-template-columns: 1fr; }
         .mockup__side { display: none; }
         .mockup__kpis { grid-template-columns: repeat(2, 1fr); }
+        .mockup__work { grid-template-columns: 1fr; }
       }
 
       /* ---------- trust strip ---------- */
@@ -489,6 +608,42 @@
         color: var(--navy-400);
       }
       .trust__logos .sep { color: var(--navy-200); }
+
+      /* ---------- Der Alltag heute (pains) ---------- */
+      .today { padding: 80px 0 8px; }
+      .today__intro { max-width: 46em; }
+      .today__grid {
+        margin-top: 40px;
+        display: grid;
+        gap: 20px;
+      }
+      @media (min-width: 820px) {
+        .today__grid { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+      }
+      .pain-card {
+        border-radius: 14px;
+        border: 1px solid var(--navy-100);
+        background: var(--navy-50);
+        padding: 24px;
+      }
+      .pain-card .num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px; height: 32px;
+        border-radius: 9999px;
+        background: rgba(229, 72, 77, 0.10);
+        color: var(--ampel-rot);
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .pain-card p {
+        margin-top: 16px;
+        font-size: 15px;
+        line-height: 1.6;
+        color: var(--navy-700);
+      }
+      .pain-card p .cost { font-weight: 700; color: var(--navy-900); }
 
       /* ---------- feature blocks ---------- */
       .features { padding: 80px 0 24px; }
@@ -842,24 +997,22 @@
               <span style="background:#F5A623"></span>
               <span style="background:#30A46C"></span>
             </span>
-            Einsatz-Koordination für Bau &amp; Handwerk
+            KI-gestützter Kundendienst für Bau &amp; Handwerk
           </span>
 
           <h1>
-            Schluss mit Leerfahrten. Jede Kolonne fährt nur los, wenn die Ampel
-            <span class="gruen">grün</span> ist.
+            Kundenanfragen schneller beantwortet.
+            Probleme sauber <span class="gruen">gelöst</span>.
           </h1>
 
-          <p class="hero__pain">
-            Jede vergebliche Anfahrt kostet Sie rund 250&nbsp;€ — Fahrzeug, Lohn
-            und ein verlorener Arbeitstag der Kolonne.
-          </p>
-
           <p class="hero__lead">
-            BauAmpel prüft Zugang, Material und Vorgewerke — bevor die Kolonne
-            fährt. Der Kunde bestätigt den Zugang per Magic-Link, die Ampel
-            springt auf Grün, und Ihre Disposition sieht jeden Morgen auf einen
-            Blick, welche Einsätze wirklich bereit sind.
+            BauAmpel bündelt Ihre gesamte Kundenkommunikation an einem Ort.
+            Eingehende E-Mails werden automatisch dem richtigen Auftraggeber und
+            der richtigen Baustelle zugeordnet, die KI schlägt rechtssichere
+            Antworten vor — Sie prüfen und geben frei. Aus jeder Reklamation
+            wird ein geplanter, vorbereiteter Einsatz. Und weil jede Anfahrt
+            vorab auf Zugang, Material und Vorgewerke geprüft wird, sparen Sie
+            sich die teuren Leerfahrten.
           </p>
 
           <div class="hero__cta">
@@ -867,7 +1020,7 @@
               <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M4 2.5v9l7-4.5-7-4.5z" fill="currentColor"/></svg>
               Live-Sandbox testen
             </a>
-            <a class="btn btn--ghost" href="mailto:amid.fish@gmail.com?subject=BauAmpel%20Pilotprogramm">Pilotprogramm anfragen&nbsp;→</a>
+            <a class="btn btn--ghost" href="mailto:dmytro@rybka.me?subject=BauAmpel%20Pilotprogramm">Pilotprogramm anfragen&nbsp;→</a>
           </div>
           <p class="hero__cta-note">Ohne Registrierung. Ohne Installation.</p>
 
@@ -909,63 +1062,69 @@
                     <span class="brand__word">Bau<em>Ampel</em></span>
                   </span>
                   <nav class="mockup__nav">
-                    <span class="active">Übersicht</span>
+                    <span>Übersicht</span>
                     <span>Planung</span>
                     <span>Projekte</span>
                     <span>Auftraggeber</span>
                     <span>Kolonnen</span>
                     <span>Leerfahrten</span>
-                    <span>Reklamationen <span class="cnt">2</span></span>
-                    <span>Posteingang <span class="cnt">5</span></span>
+                    <span>Reklamationen</span>
+                    <span class="active">Posteingang <span class="cnt">5</span></span>
                   </nav>
                 </div>
                 <!-- main -->
                 <div class="mockup__main">
-                  <p class="mockup__title">Übersicht · Mittwoch, 9. Juli</p>
+                  <p class="mockup__title">Posteingang · Mittwoch, 9. Juli</p>
 
-                  <div class="mockup__ki">
-                    <span class="tag">KI</span>
-                    <span>
-                      <strong>Zusammenfassung:</strong> 12 Einsätze morgen geplant, 9 bereit.
-                      Bei Fam. Werner fehlt die Zugangsbestätigung, Baustelle Lindenhof wartet
-                      auf Estrich-Freigabe des Vorgewerks.
-                    </span>
-                  </div>
-
-                  <div class="mockup__alert">
-                    <span class="blip"></span>
-                    3 Einsätze morgen nicht bereit — Kolonnen noch nicht losschicken
-                  </div>
-
-                  <div class="mockup__kpis">
-                    <div class="mockup__kpi"><span class="v">12</span><span class="l">Einsätze morgen</span></div>
-                    <div class="mockup__kpi"><span class="v gruen">9</span><span class="l">Bereit</span></div>
-                    <div class="mockup__kpi"><span class="v rot">3</span><span class="l">Blockiert</span></div>
-                    <div class="mockup__kpi"><span class="v">4.250&nbsp;€</span><span class="l">Leerfahrten Juli</span></div>
-                  </div>
-
-                  <p class="mockup__seclabel">Einsätze · Donnerstag, 10. Juli</p>
-                  <div class="mockup__cards">
-                    <div class="dispatch dispatch--gruen">
-                      <div>
-                        <span class="who">Kolonne Yilmaz · EFH Brandt, Sanitär-Rohinstallation</span><br />
-                        <span class="meta">07:00 · Meißen · 3 Mann</span>
+                  <div class="mockup__work">
+                    <!-- left: inbound support emails -->
+                    <div>
+                      <p class="mockup__seclabel" style="margin-top:2px">Posteingang · 5 neu</p>
+                      <div style="margin-top:6px">
+                        <div class="inbox-item inbox-item--neu">
+                          <div class="top-line">
+                            <span class="subj">Feuchtigkeit im Keller</span>
+                            <span class="status"><i class="i-rot"></i>Neu</span>
+                          </div>
+                          <span class="match">Wohnbau Herzog</span>
+                        </div>
+                        <div class="inbox-item inbox-item--ueber">
+                          <div class="top-line">
+                            <span class="subj">Nachfrage Anschlusstermin</span>
+                            <span class="status"><i class="i-grau"></i>Übernommen</span>
+                          </div>
+                          <span class="match">Fertighaus Brandt</span>
+                        </div>
+                        <div class="inbox-item inbox-item--neu">
+                          <div class="top-line">
+                            <span class="subj">Mängelrüge Fenster</span>
+                            <span class="status"><i class="i-rot"></i>Neu</span>
+                          </div>
+                          <span class="match">GU Hoffmann Bau</span>
+                        </div>
                       </div>
-                      <span class="checks"><i class="i-gruen"></i><i class="i-gruen"></i><i class="i-gruen"></i>&nbsp;Zugang · Material · Vorgewerke</span>
                     </div>
-                    <div class="dispatch dispatch--gelb">
-                      <div>
-                        <span class="who">Kolonne Petersen · Lindenhof 12, Fliesen EG</span><br />
-                        <span class="meta">07:30 · Dresden · 2 Mann</span>
+
+                    <!-- right: KI reply draft -->
+                    <div>
+                      <p class="mockup__seclabel" style="margin-top:2px">KI-Antwortentwurf</p>
+                      <div class="draft-card" style="margin-top:6px">
+                        <span class="kipill">KI-Entwurf</span>
+                        <p class="draft-subj">Antwort: Feuchtigkeit im Keller</p>
+                        <div class="draft-body">
+                          <p>Sehr geehrte Frau Herzog,</p>
+                          <p>vielen Dank für Ihre Nachricht. Wir haben Ihr Anliegen aufgenommen und einen Termin zur Begutachtung vorbereitet.</p>
+                          <p>Eine Kolonne prüft die Ursache vor Ort; das weitere Vorgehen stimmen wir anschließend mit Ihnen ab.</p>
+                        </div>
+                        <div class="draft-warn">
+                          <span class="blip"></span>
+                          Beispieltext — vor Versand prüfen
+                        </div>
+                        <div class="draft-actions">
+                          <span class="btn-freigeben">Freigeben</span>
+                          <span class="chip-improve">Verbessern: kürzer</span>
+                        </div>
                       </div>
-                      <span class="checks"><i class="i-gruen"></i><i class="i-gruen"></i><i class="i-gelb"></i>&nbsp;Vorgewerk offen</span>
-                    </div>
-                    <div class="dispatch dispatch--rot">
-                      <div>
-                        <span class="who">Kolonne Krause · Fam. Werner, Badumbau</span><br />
-                        <span class="meta">08:00 · Radebeul · 2 Mann</span>
-                      </div>
-                      <span class="checks"><i class="i-rot"></i><i class="i-gruen"></i><i class="i-grau"></i>&nbsp;Zugang unbestätigt</span>
                     </div>
                   </div>
                 </div>
@@ -987,9 +1146,44 @@
           <span class="sep">·</span>
           <span>ToolTime</span>
           <span class="sep">·</span>
-          <span>Excel</span>
+          <span>Microsoft 365</span>
           <span class="sep">·</span>
-          <span>WhatsApp</span>
+          <span>Excel &amp; WhatsApp</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================== DER ALLTAG HEUTE =========================== -->
+    <section class="today">
+      <div class="container">
+        <div class="today__intro">
+          <p class="kicker">Der Alltag heute</p>
+          <h2>Der Kundendienst kostet Stunden — und Anliegen bleiben liegen.</h2>
+        </div>
+        <div class="today__grid">
+          <div class="pain-card">
+            <span class="num">1</span>
+            <p>
+              Kundenanfragen kommen über E-Mail, Telefon und WhatsApp.
+              Zuordnen, priorisieren, beantworten — das kostet den Kundendienst
+              jeden Tag Stunden, und Anliegen bleiben liegen.
+            </p>
+          </div>
+          <div class="pain-card">
+            <span class="num">2</span>
+            <p>
+              Auf Mängelrügen rechtssicher und fristgerecht zu antworten, bindet
+              Zeit — und jeder Fehler ist ein Haftungsrisiko.
+            </p>
+          </div>
+          <div class="pain-card">
+            <span class="num">3</span>
+            <p>
+              Bis eine Kolonne rausfährt, ist oft unklar, ob Zugang, Material und
+              Vorgewerke wirklich bereit sind. Die vergebliche Anfahrt kostet
+              rund <span class="cost">250&nbsp;€</span>.
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -998,25 +1192,210 @@
     <section class="features" id="funktionen">
       <div class="container">
         <div class="features__intro">
-          <p class="kicker">Vier Bausteine. Ein Ziel: keine vergebliche Anfahrt.</p>
-          <h2>Vom Ampel-Board bis zum Posteingang — alles, was zwischen Büro und Baustelle verloren geht.</h2>
+          <p class="kicker">Fünf Bausteine. Ein Ziel: schnelle Antworten, saubere Lösungen.</p>
+          <h2>Vom Posteingang bis zur vermiedenen Leerfahrt — alles, was zwischen Kunde, Büro und Baustelle verloren geht.</h2>
         </div>
 
-        <!-- Feature 1: Ampel-Board & Leerfahrten-Report -->
+        <!-- Feature 1: E-Mail-Posteingang mit automatischer Zuordnung -->
         <div class="feature">
           <div class="feature__copy">
-            <p class="kicker kicker--action">Ampel-Board &amp; Leerfahrten-Report</p>
-            <h3>Grün heißt fahren. Alles andere heißt: erst klären.</h3>
+            <p class="kicker kicker--action">E-Mail-Posteingang mit automatischer Zuordnung</p>
+            <h3>Jede Kundenmail landet automatisch am richtigen Auftraggeber.</h3>
             <p class="lead">
-              Für jeden Einsatz prüft BauAmpel drei Dinge, bevor die Kolonne
-              startet: Hat der Kunde den Zugang bestätigt? Ist das Material auf
-              der Baustelle? Sind die Vorgewerke fertig? Erst wenn alle drei
-              Lichter grün sind, steht der Einsatz auf „bereit".
+              Eingehende Kundenmails landen an einem Ort, automatisch dem
+              Auftraggeber und der Baustelle zugeordnet. Kein Vorgang bleibt
+              liegen — Ihr Kundendienst sieht auf einen Blick, was neu ist und
+              was schon übernommen wurde.
             </p>
             <ul>
               <li>
                 <span class="check">✓</span>
-                <span><strong>Zugangsbestätigung per Magic-Link.</strong> Der Kunde tippt einmal auf sein Handy — kein Login, keine App, kein Telefonat.</span>
+                <span><strong>Automatische Zuordnung</strong> zu Auftraggeber, Projekt und Baustelle — ohne manuelles Einsortieren.</span>
+              </li>
+              <li>
+                <span class="check">✓</span>
+                <span><strong>Alles an einem Ort:</strong> E-Mails aus Microsoft 365, Weiterleitungen und Nachfragen laufen in einem Posteingang zusammen.</span>
+              </li>
+              <li>
+                <span class="check">✓</span>
+                <span><strong>Nichts bleibt liegen:</strong> Mängelrügen und Fristen werden erkannt und sichtbar gemacht.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="feature__visual" aria-hidden="true">
+            <div class="panel">
+              <div class="card">
+                <p class="card__label">Posteingang · heute</p>
+                <div class="inbox-row">
+                  <div>
+                    <p class="subj">Feuchtigkeit im Keller</p>
+                    <p class="from">herzog-wohnbau.de → Wohnbau Herzog</p>
+                  </div>
+                  <span class="chip chip--rot">Neu</span>
+                </div>
+                <div class="inbox-row">
+                  <div>
+                    <p class="subj">Nachfrage Anschlusstermin</p>
+                    <p class="from">m.brandt@web.de → Fertighaus Brandt</p>
+                  </div>
+                  <span class="chip chip--grau">Übernommen</span>
+                </div>
+                <div class="inbox-row">
+                  <div>
+                    <p class="subj">Mängelrüge Fenster</p>
+                    <p class="from">hoffmann-bau.de → GU Hoffmann Bau</p>
+                  </div>
+                  <span class="chip chip--rot">Reklamation</span>
+                </div>
+                <div class="inbox-row">
+                  <div>
+                    <p class="subj">Lieferavis: Fenster, KW&nbsp;28</p>
+                    <p class="from">baustoff-richter.de → BV Lindenhof</p>
+                  </div>
+                  <span class="chip chip--gruen">Material ✓</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 2: KI-Antwortentwürfe — geprüft und freigegeben (flip) -->
+        <div class="feature feature--flip">
+          <div class="feature__copy">
+            <p class="kicker kicker--action">KI-Antwortentwürfe — geprüft und freigegeben</p>
+            <h3>Auf jede Anfrage eine souveräne Antwort — in Minuten statt Tagen.</h3>
+            <p class="lead">
+              Die KI formuliert die komplette Antwort oder füllt anwaltlich
+              vorformulierte VOB/B-Textbausteine mit Ihren echten Projektdaten.
+              Sie verbessern per Anweisung („kürzer", „förmlicher"), prüfen und
+              geben frei. Der Versand erfolgt immer erst nach menschlicher
+              Freigabe.
+            </p>
+            <ul>
+              <li>
+                <span class="check">✓</span>
+                <span><strong>Vollständiger Entwurf oder VOB/B-Baustein,</strong> gefüllt mit den echten Fakten aus Ihrem Projekt — Fristen, Positionen, Fotos.</span>
+              </li>
+              <li>
+                <span class="check">✓</span>
+                <span><strong>Verbessern per Anweisung:</strong> „kürzer", „förmlicher" — die KI passt den Entwurf an, bis er sitzt.</span>
+              </li>
+              <li>
+                <span class="check">✓</span>
+                <span><strong>Freigabe-Pflicht:</strong> jeder Entwurf wird von einem Menschen geprüft und freigegeben. Immer.</span>
+              </li>
+            </ul>
+            <p class="smallprint">
+              Hinweis: Die Textbausteine sind Beispieltexte und nicht anwaltlich
+              geprüft. BauAmpel erbringt keine Rechtsberatung — im Zweifel gehört
+              der Fall zu Ihrem Anwalt.
+            </p>
+          </div>
+          <div class="feature__visual" aria-hidden="true">
+            <div class="panel">
+              <div class="card">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+                  <p class="card__label">Eingegangen · Mängelrüge</p>
+                  <span class="chip chip--rot">Frist: 12 Tage</span>
+                </div>
+                <p style="margin-top:8px;font-size:13.5px;font-weight:600">GU Hoffmann Bau GmbH · BV Lindenhof</p>
+                <p style="margin-top:4px;font-size:12.5px;color:var(--navy-600)">„…rügen wir hiermit Mängel an den Fensterarbeiten im EG gemäß §&nbsp;4 Abs.&nbsp;7 VOB/B…"</p>
+              </div>
+              <div class="card">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+                  <p class="card__label">Antwortentwurf · VOB/B-Baustein M-04</p>
+                  <span class="chip chip--gelb">Wartet auf Freigabe</span>
+                </div>
+                <div class="doc-line" style="width:92%"></div>
+                <div class="doc-line doc-line--fill" style="width:70%"></div>
+                <div class="doc-line" style="width:85%"></div>
+                <div class="doc-line doc-line--fill" style="width:55%"></div>
+                <div class="doc-line" style="width:78%"></div>
+                <p style="margin-top:12px;font-size:11.5px;color:var(--navy-500)">
+                  <span class="chip chip--blau">KI: Fakten eingefügt</span>&nbsp;
+                  <span class="chip chip--grau">2 Fotos angeheftet</span>
+                </p>
+                <div style="margin-top:12px;display:flex;gap:8px">
+                  <span class="chip chip--gruen" style="padding:6px 14px">Prüfen &amp; freigeben</span>
+                  <span class="chip chip--grau" style="padding:6px 14px">Verbessern: kürzer</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 3: Vom Problem zum Einsatz — in Minuten -->
+        <div class="feature">
+          <div class="feature__copy">
+            <p class="kicker kicker--action">Vom Problem zum Einsatz — in Minuten</p>
+            <h3>Aus der Reklamation wird ein geplanter, vorbereiteter Einsatz.</h3>
+            <p class="lead">
+              Aus einer Reklamation wird ein geplanter Einsatz: Kolonne
+              zuordnen, Termin setzen, Zugang beim Kunden per Magic-Link
+              bestätigen lassen. Schnelle Reaktion, dokumentierte Lösung — der
+              Kunde weiß jederzeit, dass sein Anliegen bearbeitet wird.
+            </p>
+            <ul>
+              <li>
+                <span class="check">✓</span>
+                <span><strong>Ein Klick vom Anliegen zum Einsatz:</strong> Kolonne zuordnen, Termin setzen — die Baustelle ist schon verknüpft.</span>
+              </li>
+              <li>
+                <span class="check">✓</span>
+                <span><strong>Zugang per Magic-Link bestätigt:</strong> der Kunde tippt einmal aufs Handy — kein Login, kein Telefonat.</span>
+              </li>
+              <li>
+                <span class="check">✓</span>
+                <span><strong>Dokumentierte Lösung:</strong> jeder Schritt vom Problem bis zur Erledigung bleibt am Vorgang nachvollziehbar.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="feature__visual" aria-hidden="true">
+            <div class="panel">
+              <div class="card">
+                <p class="card__label">Reklamation → Einsatz</p>
+                <div class="inbox-row">
+                  <div>
+                    <p class="subj">Feuchtigkeit im Keller</p>
+                    <p class="from">Wohnbau Herzog · aufgenommen 09:12</p>
+                  </div>
+                  <span class="chip chip--blau">In Bearbeitung</span>
+                </div>
+                <div class="report-row"><span>Kolonne zugeordnet</span><span class="val">Krause · 2 Mann</span></div>
+                <div class="report-row"><span>Termin gesetzt</span><span class="val">Do, 10. Juli · 08:00</span></div>
+                <div class="report-row"><span>Zugang (Magic-Link)</span><span class="val ok">Vom Kunden bestätigt ✓</span></div>
+              </div>
+              <div class="card">
+                <div class="dispatch dispatch--gruen" style="border:0;border-left:4px solid var(--ampel-gruen);padding:6px 10px;background:var(--navy-50)">
+                  <div>
+                    <span class="who" style="font-size:12.5px">Wohnbau Herzog · Keller-Begutachtung</span><br />
+                    <span class="meta" style="font-size:10.5px">Do 08:00 · Kolonne Krause</span>
+                  </div>
+                  <span class="chip chip--gruen">Bereit</span>
+                </div>
+                <p style="margin-top:10px;font-size:12px;color:var(--navy-600)">
+                  Aus der Reklamation wurde in unter 2&nbsp;Minuten ein vorbereiteter Einsatz.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 4: Ampel-Board & Leerfahrten-Report (flip) -->
+        <div class="feature feature--flip">
+          <div class="feature__copy">
+            <p class="kicker kicker--action">Ampel-Board &amp; Leerfahrten-Report</p>
+            <h3>Jede Anfahrt erst bei Grün: Zugang, Material, Vorgewerke.</h3>
+            <p class="lead">
+              Für jeden Einsatz prüft BauAmpel drei Dinge, bevor die Kolonne
+              startet: Hat der Kunde den Zugang bestätigt? Ist das Material auf
+              der Baustelle? Sind die Vorgewerke fertig? Jede vermiedene und
+              jede vergebliche Anfahrt wird in Euro sichtbar.
+            </p>
+            <ul>
+              <li>
+                <span class="check">✓</span>
+                <span><strong>Grün heißt fahren.</strong> Erst wenn Zugang, Material und Vorgewerke stimmen, steht der Einsatz auf „bereit".</span>
               </li>
               <li>
                 <span class="check">✓</span>
@@ -1024,7 +1403,7 @@
               </li>
               <li>
                 <span class="check">✓</span>
-                <span><strong>Leerfahrten-Kostenreport:</strong> jede vergebliche Anfahrt wird erfasst und in Euro beziffert — nach Ursache, Kolonne und Monat.</span>
+                <span><strong>Leerfahrten-Kostenreport:</strong> jede vergebliche und jede vermiedene Anfahrt in Euro — nach Ursache, Kolonne und Monat.</span>
               </li>
             </ul>
           </div>
@@ -1053,16 +1432,16 @@
           </div>
         </div>
 
-        <!-- Feature 2: Kolonnen-Bericht (flip) -->
-        <div class="feature feature--flip">
+        <!-- Feature 5: Kolonnen-Bericht vom Handy -->
+        <div class="feature">
           <div class="feature__copy">
             <p class="kicker kicker--action">Kolonnen-Bericht vom Handy</p>
             <h3>Der Bericht entsteht auf der Baustelle — nicht abends am Küchentisch.</h3>
             <p class="lead">
               Die Kolonne dokumentiert direkt vor Ort: erledigte LV-Positionen
               antippen, Vorher-/Nachher-Fotos aufnehmen, kurz aufs Mikrofon
-              sprechen. Die KI strukturiert die Sprachnotiz zu einem sauberen
-              Bericht — fertig, bevor der Transporter vom Hof rollt.
+              sprechen. LV-Positionen, Vorher/Nachher-Fotos, Sprachnotiz —
+              lückenloser Nachweis, auch für die QDF-Dokumentation.
             </p>
             <ul>
               <li>
@@ -1071,7 +1450,7 @@
               </li>
               <li>
                 <span class="check">✓</span>
-                <span><strong>Vorher-/Nachher-Fotos</strong> mit Zeitstempel — Ihre Absicherung bei Reklamationen.</span>
+                <span><strong>Vorher-/Nachher-Fotos</strong> mit Zeitstempel — Ihre Absicherung bei Reklamationen und für die QDF-Dokumentation.</span>
               </li>
               <li>
                 <span class="check">✓</span>
@@ -1109,135 +1488,6 @@
             </div>
           </div>
         </div>
-
-        <!-- Feature 3: Rechtssichere Antwortentwürfe -->
-        <div class="feature">
-          <div class="feature__copy">
-            <p class="kicker kicker--action">Antwortentwürfe für Mängelrügen &amp; Co.</p>
-            <h3>Auf jede Mängelrüge eine souveräne Antwort — in Minuten statt Tagen.</h3>
-            <p class="lead">
-              Mängelrüge, Behinderungsanzeige, Nachtragsankündigung: BauAmpel
-              schlägt Antworten auf Basis VOB/B-orientierter, anwaltlich
-              vorformulierter Textbausteine vor. Die KI füllt ausschließlich die
-              Fakten aus Ihrem Projekt ein — Fristen, Positionen, Fotos. Kein
-              Entwurf verlässt das Haus ohne Ihre Freigabe.
-            </p>
-            <ul>
-              <li>
-                <span class="check">✓</span>
-                <span><strong>Vorformulierte Textbausteine,</strong> orientiert an der VOB/B — die KI erfindet keine Rechtsauffassung, sie füllt Fakten ein.</span>
-              </li>
-              <li>
-                <span class="check">✓</span>
-                <span><strong>Freigabe-Pflicht:</strong> jeder Entwurf wird von einem Menschen geprüft und freigegeben. Immer.</span>
-              </li>
-              <li>
-                <span class="check">✓</span>
-                <span><strong>Belege automatisch angeheftet:</strong> Kolonnen-Berichte und Fotos aus dem Projekt stützen jede Antwort.</span>
-              </li>
-            </ul>
-            <p class="smallprint">
-              Hinweis: Die Textbausteine sind Beispieltexte und nicht anwaltlich
-              geprüft. BauAmpel erbringt keine Rechtsberatung — im Zweifel gehört
-              der Fall zu Ihrem Anwalt.
-            </p>
-          </div>
-          <div class="feature__visual" aria-hidden="true">
-            <div class="panel">
-              <div class="card">
-                <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
-                  <p class="card__label">Eingegangen · Mängelrüge</p>
-                  <span class="chip chip--rot">Frist: 12 Tage</span>
-                </div>
-                <p style="margin-top:8px;font-size:13.5px;font-weight:600">GU Hoffmann Bau GmbH · BV Lindenhof</p>
-                <p style="margin-top:4px;font-size:12.5px;color:var(--navy-600)">„…rügen wir hiermit Mängel an den Fliesenarbeiten im EG gemäß §&nbsp;4 Abs.&nbsp;7 VOB/B…"</p>
-              </div>
-              <div class="card">
-                <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
-                  <p class="card__label">Antwortentwurf · VOB/B-Baustein M-04</p>
-                  <span class="chip chip--gelb">Wartet auf Freigabe</span>
-                </div>
-                <div class="doc-line" style="width:92%"></div>
-                <div class="doc-line doc-line--fill" style="width:70%"></div>
-                <div class="doc-line" style="width:85%"></div>
-                <div class="doc-line doc-line--fill" style="width:55%"></div>
-                <div class="doc-line" style="width:78%"></div>
-                <p style="margin-top:12px;font-size:11.5px;color:var(--navy-500)">
-                  <span class="chip chip--blau">KI: Fakten eingefügt</span>&nbsp;
-                  <span class="chip chip--grau">2 Fotos angeheftet</span>
-                </p>
-                <div style="margin-top:12px;display:flex;gap:8px">
-                  <span class="chip chip--gruen" style="padding:6px 14px">Prüfen &amp; freigeben</span>
-                  <span class="chip chip--grau" style="padding:6px 14px">Verwerfen</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Feature 4: Posteingang (flip) -->
-        <div class="feature feature--flip">
-          <div class="feature__copy">
-            <p class="kicker kicker--action">E-Mail-Posteingang</p>
-            <h3>Jede Mail landet automatisch am richtigen Projekt.</h3>
-            <p class="lead">
-              Bautagesberichte, Lieferavise, Nachfragen vom Auftraggeber — alles
-              kommt per E-Mail und versandet im Postfach. BauAmpel ordnet
-              eingehende Mails automatisch dem passenden Projekt und Einsatz zu
-              und aktualisiert die Ampel gleich mit: Lieferavis rein, Material
-              springt auf Grün.
-            </p>
-            <ul>
-              <li>
-                <span class="check">✓</span>
-                <span><strong>Automatische Zuordnung</strong> zu Projekt, Auftraggeber und Einsatz — ohne manuelles Einsortieren.</span>
-              </li>
-              <li>
-                <span class="check">✓</span>
-                <span><strong>Ampel-Wirkung inklusive:</strong> relevante Mails (Lieferung, Freigabe, Absage) schalten den Einsatz-Status um.</span>
-              </li>
-              <li>
-                <span class="check">✓</span>
-                <span><strong>Nichts geht verloren:</strong> Mängelrügen und Fristen werden erkannt und im Projekt sichtbar gemacht.</span>
-              </li>
-            </ul>
-          </div>
-          <div class="feature__visual" aria-hidden="true">
-            <div class="panel">
-              <div class="card">
-                <p class="card__label">Posteingang · heute</p>
-                <div class="inbox-row">
-                  <div>
-                    <p class="subj">Lieferavis: Fliesen, KW&nbsp;28</p>
-                    <p class="from">baustoff-richter.de → BV Lindenhof</p>
-                  </div>
-                  <span class="chip chip--gruen">Material ✓</span>
-                </div>
-                <div class="inbox-row">
-                  <div>
-                    <p class="subj">Terminbestätigung Badumbau</p>
-                    <p class="from">m.werner@web.de → Einsatz Do 08:00</p>
-                  </div>
-                  <span class="chip chip--gruen">Zugang ✓</span>
-                </div>
-                <div class="inbox-row">
-                  <div>
-                    <p class="subj">Mängelrüge Fliesenarbeiten EG</p>
-                    <p class="from">hoffmann-bau.de → BV Lindenhof</p>
-                  </div>
-                  <span class="chip chip--rot">Reklamation</span>
-                </div>
-                <div class="inbox-row">
-                  <div>
-                    <p class="subj">Estrich-Freigabe verzögert sich</p>
-                    <p class="from">estrich-mueller.de → Einsatz Fr</p>
-                  </div>
-                  <span class="chip chip--gelb">Vorgewerk !</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -1246,26 +1496,26 @@
       <div class="container roi__grid">
         <div>
           <p class="kicker">Die Rechnung</p>
-          <h2>Eine vermiedene Leerfahrt pro Woche ≈ 1.000&nbsp;€ im Monat.</h2>
+          <h2>Schnellere Antworten, zufriedenere Kunden — und jede vermiedene Leerfahrt ≈ 250&nbsp;€.</h2>
           <p class="roi__lead">
-            Eine vergebliche Anfahrt kostet schnell 250&nbsp;€ — Transporter,
-            zwei Mann Lohn, verlorene Stunden, verschobener Bauablauf. Die
-            meisten Betriebe haben mehrere davon pro Woche und sehen die Summe
-            nie schwarz auf weiß. BauAmpel macht sie sichtbar — und verhindert
-            die nächste, bevor die Kolonne den Hof verlässt.
+            Ihr Kundendienst spart Stunden pro Woche; schon eine vermiedene
+            Leerfahrt pro Woche ≈ 12.500&nbsp;€ im Jahr. Anfragen werden schneller
+            beantwortet, Reklamationen zügig zum Einsatz — und jede vergebliche
+            Anfahrt, die BauAmpel verhindert, spart rund 250&nbsp;€ an Transporter,
+            Lohn und verlorener Zeit.
           </p>
         </div>
         <div class="roi__card">
           <p class="card__label">Beispielrechnung · Betrieb mit 3 Kolonnen</p>
+          <div class="report-row"><span>Zeitersparnis Kundendienst pro Woche</span><span class="val ok tnum">Stunden</span></div>
           <div class="report-row"><span>Kosten pro Leerfahrt (konservativ)</span><span class="val tnum">~250&nbsp;€</span></div>
           <div class="report-row"><span>Vermiedene Leerfahrten pro Woche</span><span class="val tnum">1</span></div>
-          <div class="report-row"><span>Ersparnis pro Monat</span><span class="val ok tnum">≈ 1.000&nbsp;€</span></div>
-          <div class="report-row"><span>Ersparnis pro Jahr</span><span class="val ok tnum">≈ 12.000&nbsp;€</span></div>
+          <div class="report-row"><span>Ersparnis Leerfahrten pro Jahr</span><span class="val ok tnum">≈ 12.500&nbsp;€</span></div>
           <p class="smallprint">
             Konservativ gerechnet: nur eine vermiedene Fahrt pro Woche über alle
-            Kolonnen. Nicht eingerechnet: schnellere Antworten auf Mängelrügen,
-            weniger Abend-Schreibarbeit für die Kolonnen und sauber belegte
-            Berichte bei Streitfällen.
+            Kolonnen (1 × 250 € × 50 Wochen). Nicht eingerechnet: die eingesparten
+            Kundendienst-Stunden, schnellere Antworten auf Mängelrügen und sauber
+            belegte Berichte bei Streitfällen.
           </p>
         </div>
       </div>
@@ -1275,18 +1525,19 @@
     <section class="cta" id="kontakt">
       <div class="container">
         <p class="kicker">Selbst ausprobieren</p>
-        <h2>Sehen Sie Ihre Ampel, bevor die nächste Kolonne umsonst fährt.</h2>
+        <h2>Sehen Sie, wie schnell aus einer Anfrage eine fertige Antwort wird.</h2>
         <p class="lead">
           Die Live-Sandbox ist das echte Produkt mit realistischen
-          Beispieldaten — klicken Sie sich durch, ohne Registrierung. Oder
-          fragen Sie direkt das Pilotprogramm für Ihren Betrieb an.
+          Beispieldaten — klicken Sie sich durch den Posteingang und die
+          KI-Antwortentwürfe, ohne Registrierung. Oder fragen Sie direkt das
+          Pilotprogramm für Ihren Betrieb an.
         </p>
         <div class="cta__buttons">
           <a class="btn btn--action" href="#">
             <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M4 2.5v9l7-4.5-7-4.5z" fill="currentColor"/></svg>
             Live-Sandbox testen — ohne Registrierung
           </a>
-          <a class="btn btn--outline-light" href="mailto:amid.fish@gmail.com?subject=BauAmpel%20Pilotprogramm">Pilotprogramm anfragen</a>
+          <a class="btn btn--outline-light" href="mailto:dmytro@rybka.me?subject=BauAmpel%20Pilotprogramm">Pilotprogramm anfragen</a>
         </div>
         <p class="cta__note">Antwort innerhalb eines Werktags. Keine Newsletter, keine Verkaufsskripte.</p>
       </div>
@@ -1306,14 +1557,15 @@
               <span class="brand__word">Bau<em>Ampel</em></span>
             </span>
             <p>
-              Einsatz-Koordination für Bauunternehmen und Handwerksbetriebe in
-              der DACH-Region. Arbeitet neben Ihrer bestehenden Software.
+              KI-gestützter Kundendienst für Bauunternehmen und
+              Handwerksbetriebe in der DACH-Region. Arbeitet neben Ihrer
+              bestehenden Software.
             </p>
           </div>
           <nav class="footer__links" aria-label="Rechtliches">
             <a href="#">Impressum</a>
             <a href="#">Datenschutz</a>
-            <a href="mailto:amid.fish@gmail.com">Kontakt</a>
+            <a href="mailto:dmytro@rybka.me">Kontakt</a>
           </nav>
         </div>
         <div class="footer__legal">
