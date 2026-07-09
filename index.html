@@ -3,15 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>BauAmpel — KI-gestützter Kundendienst für Bau &amp; Handwerk. Anfragen schneller beantwortet.</title>
+    <title>BauAmpel — KI-gestützte Baustellen-Koordination. Der aktuelle Stand erreicht die Kolonne, bevor sie losfährt.</title>
     <meta
       name="description"
-      content="BauAmpel bündelt Ihre Kundenkommunikation an einem Ort: E-Mails automatisch zugeordnet, rechtssichere KI-Antwortentwürfe mit menschlicher Freigabe, aus jeder Reklamation ein geplanter Einsatz — und dadurch weniger teure Leerfahrten. Für Bauunternehmen und Handwerksbetriebe in der DACH-Region."
+      content="Die teuersten Baustellenfehler sind derselbe Fehler: Eine Absage, ein Fertigstellungsstatus, eine Spezifikation oder eine Kundenanfrage war längst bekannt — erreichte aber die Kolonne oder den Kunden nicht rechtzeitig. BauAmpel bündelt Kommunikation und Status an einem Ort. Die KI erkennt Abhängigkeiten, übersieht keine Anfrage und eskaliert rechtzeitig. Für Bauunternehmen und Handwerksbetriebe in der DACH-Region."
     />
-    <meta property="og:title" content="BauAmpel — KI-gestützter Kundendienst für Bau &amp; Handwerk" />
+    <meta property="og:title" content="BauAmpel — KI-gestützte Baustellen-Koordination" />
     <meta
       property="og:description"
-      content="Kundenanfragen schneller beantwortet, Probleme sauber gelöst: automatische Zuordnung, rechtssichere KI-Antwortentwürfe mit Freigabe, aus jeder Reklamation ein vorbereiteter Einsatz — und weniger Leerfahrten."
+      content="Der aktuelle Stand erreicht die Kolonne — bevor sie losfährt. BauAmpel bündelt Kommunikation und Status an einem Ort; die KI erkennt Abhängigkeiten, übersieht keine Anfrage und eskaliert rechtzeitig — bevor jemand 400 km umsonst fährt oder ein Kunde im Ungewissen wartet."
     />
     <meta property="og:type" content="website" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
@@ -609,6 +609,88 @@
       }
       .trust__logos .sep { color: var(--navy-200); }
 
+      /* ---------- Vignetten-Band (aus dem Baualltag) ---------- */
+      .vignettes { padding: 72px 0 8px; }
+      .vignettes__intro { max-width: 50em; }
+      .vignettes__intro h2 { margin-top: 12px; }
+      .vignettes__lead {
+        margin-top: 16px;
+        max-width: 44em;
+        font-size: 16px;
+        line-height: 1.6;
+        color: var(--navy-600);
+      }
+      .vignettes__lead strong { color: var(--navy-900); font-weight: 700; }
+      .vignettes__grid {
+        margin-top: 40px;
+        display: grid;
+        gap: 20px;
+      }
+      @media (min-width: 720px) {
+        .vignettes__grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      }
+      .vignette {
+        border-radius: 14px;
+        border: 1px solid var(--navy-100);
+        background: #fff;
+        padding: 22px 24px;
+        box-shadow: 0 1px 3px rgba(9, 30, 66, 0.05);
+      }
+      .vignette__problem {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        font-size: 15px;
+        line-height: 1.55;
+        color: var(--navy-600);
+      }
+      .vignette__problem .mark {
+        flex-shrink: 0;
+        margin-top: 3px;
+        width: 18px; height: 18px;
+        border-radius: 9999px;
+        background: rgba(229, 72, 77, 0.10);
+        color: var(--ampel-rot);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .vignette__solution {
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 1px solid var(--navy-100);
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        font-size: 15px;
+        line-height: 1.55;
+        color: var(--navy-800);
+      }
+      .vignette__solution .mark {
+        flex-shrink: 0;
+        margin-top: 2px;
+        width: 18px; height: 18px;
+        border-radius: 9999px;
+        background: var(--action-tint);
+        color: var(--action);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .vignette__solution .lbl {
+        display: block;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--action);
+        margin-bottom: 3px;
+      }
+
       /* ---------- Der Alltag heute (pains) ---------- */
       .today { padding: 80px 0 8px; }
       .today__intro { max-width: 46em; }
@@ -997,22 +1079,22 @@
               <span style="background:#F5A623"></span>
               <span style="background:#30A46C"></span>
             </span>
-            KI-gestützter Kundendienst für Bau &amp; Handwerk
+            KI-gestützte Baustellen-Koordination
           </span>
 
           <h1>
-            Kundenanfragen schneller beantwortet.
-            Probleme sauber <span class="gruen">gelöst</span>.
+            Der aktuelle Stand erreicht die Kolonne —
+            bevor sie <span class="gruen">losfährt</span>.
           </h1>
 
           <p class="hero__lead">
-            BauAmpel bündelt Ihre gesamte Kundenkommunikation an einem Ort.
-            Eingehende E-Mails werden automatisch dem richtigen Auftraggeber und
-            der richtigen Baustelle zugeordnet, die KI schlägt rechtssichere
-            Antworten vor — Sie prüfen und geben frei. Aus jeder Reklamation
-            wird ein geplanter, vorbereiteter Einsatz. Und weil jede Anfahrt
-            vorab auf Zugang, Material und Vorgewerke geprüft wird, sparen Sie
-            sich die teuren Leerfahrten.
+            Die teuersten Baustellenfehler sind derselbe Fehler: Eine Absage,
+            ein Fertigstellungsstatus, eine Spezifikation oder eine Kundenanfrage
+            war längst bekannt — erreichte aber die Kolonne oder den Kunden nicht
+            rechtzeitig. BauAmpel bündelt Kommunikation und Status an einem Ort.
+            Die KI erkennt Abhängigkeiten, übersieht keine Anfrage und eskaliert
+            rechtzeitig — bevor jemand 400&nbsp;km umsonst fährt, ein Gerüst
+            zweimal aufbaut oder ein Kunde im Ungewissen wartet.
           </p>
 
           <div class="hero__cta">
@@ -1153,27 +1235,108 @@
       </div>
     </section>
 
+    <!-- =========================== VIGNETTEN-BAND =========================== -->
+    <section class="vignettes">
+      <div class="container">
+        <div class="vignettes__intro">
+          <p class="kicker">Aus dem Baualltag — was heute Geld kostet</p>
+          <h2>Fast immer dieselbe Ursache: Die Information kam zu spät.</h2>
+          <p class="vignettes__lead">
+            Auf einer einzigen Baustelle summierten sich vermeidbare Fehlfahrten
+            und Nacharbeiten auf <strong>über 20.000&nbsp;€</strong>. Fast immer
+            dieselbe Ursache: Die Information kam zu spät.
+          </p>
+        </div>
+        <div class="vignettes__grid">
+          <div class="vignette">
+            <div class="vignette__problem">
+              <span class="mark" aria-hidden="true">!</span>
+              <span>Eine Kolonne fährt 400&nbsp;km zu einem Einsatz, den der
+              Bauleiter längst abgesagt hatte — die Absage erreichte sie nie.</span>
+            </div>
+            <div class="vignette__solution">
+              <span class="mark" aria-hidden="true">✓</span>
+              <span>
+                <span class="lbl">Mit BauAmpel</span>
+                Die Absage landet sofort im Tageslink der Kolonne. Sie sieht den
+                aktuellen Stand vor der Abfahrt.
+              </span>
+            </div>
+          </div>
+          <div class="vignette">
+            <div class="vignette__problem">
+              <span class="mark" aria-hidden="true">!</span>
+              <span>Ein Fertigteil geht mit falscher Seite in Produktion und wird
+              per Schwertransport 450&nbsp;km zurückgefahren — ohne
+              Rückgenehmigung.</span>
+            </div>
+            <div class="vignette__solution">
+              <span class="mark" aria-hidden="true">✓</span>
+              <span>
+                <span class="lbl">Mit BauAmpel</span>
+                Vor der Abfahrt wird die Komplettierung gegen die
+                Auftragsspezifikation abgehakt; die KI erkennt die Abweichung am
+                Verlade-Foto.
+              </span>
+            </div>
+          </div>
+          <div class="vignette">
+            <div class="vignette__problem">
+              <span class="mark" aria-hidden="true">!</span>
+              <span>Das Gerüst wird abgebaut und wieder aufgestellt, weil niemand
+              meldet, dass die Arbeiten noch laufen.</span>
+            </div>
+            <div class="vignette__solution">
+              <span class="mark" aria-hidden="true">✓</span>
+              <span>
+                <span class="lbl">Mit BauAmpel</span>
+                Der Abbau bleibt gesperrt, bis die Vorgewerke fertig gemeldet
+                sind — die KI warnt, sobald ein Folgeschritt zu früh ansteht.
+              </span>
+            </div>
+          </div>
+          <div class="vignette">
+            <div class="vignette__problem">
+              <span class="mark" aria-hidden="true">!</span>
+              <span>Eine Kundenanfrage bleibt liegen, weil der Bauleiter im Urlaub
+              ist und nicht alles übergeben hat.</span>
+            </div>
+            <div class="vignette__solution">
+              <span class="mark" aria-hidden="true">✓</span>
+              <span>
+                <span class="lbl">Mit BauAmpel</span>
+                Die KI erkennt seine offenen Vorgänge, eskaliert an die Vertretung
+                — und schickt dem Kunden automatisch eine beruhigende
+                Zwischennachricht.
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- =========================== DER ALLTAG HEUTE =========================== -->
     <section class="today">
       <div class="container">
         <div class="today__intro">
-          <p class="kicker">Der Alltag heute</p>
-          <h2>Der Kundendienst kostet Stunden — und Anliegen bleiben liegen.</h2>
+          <p class="kicker">Warum das passiert</p>
+          <h2>Die Information existiert — sie erreicht nur den Falschen zu spät.</h2>
         </div>
         <div class="today__grid">
           <div class="pain-card">
             <span class="num">1</span>
             <p>
-              Kundenanfragen kommen über E-Mail, Telefon und WhatsApp.
-              Zuordnen, priorisieren, beantworten — das kostet den Kundendienst
-              jeden Tag Stunden, und Anliegen bleiben liegen.
+              Absagen, Fertigstellungen und Statusänderungen leben in Anrufen,
+              E-Mails und WhatsApp. Wer gerade losfährt, sieht den aktuellen
+              Stand nicht — und fährt auf gestrigen Informationen.
             </p>
           </div>
           <div class="pain-card">
             <span class="num">2</span>
             <p>
-              Auf Mängelrügen rechtssicher und fristgerecht zu antworten, bindet
-              Zeit — und jeder Fehler ist ein Haftungsrisiko.
+              Abhängigkeiten zwischen den Gewerken kennt oft nur der Bauleiter
+              „im Kopf". Fällt er aus oder ist im Urlaub, fallen offene Vorgänge
+              und Fristen durchs Raster.
             </p>
           </div>
           <div class="pain-card">
@@ -1181,7 +1344,8 @@
             <p>
               Bis eine Kolonne rausfährt, ist oft unklar, ob Zugang, Material und
               Vorgewerke wirklich bereit sind. Die vergebliche Anfahrt kostet
-              rund <span class="cost">250&nbsp;€</span>.
+              rund <span class="cost">250&nbsp;€</span> — der teure
+              Koordinationsfehler ein Vielfaches.
             </p>
           </div>
         </div>
@@ -1192,20 +1356,20 @@
     <section class="features" id="funktionen">
       <div class="container">
         <div class="features__intro">
-          <p class="kicker">Fünf Bausteine. Ein Ziel: schnelle Antworten, saubere Lösungen.</p>
-          <h2>Vom Posteingang bis zur vermiedenen Leerfahrt — alles, was zwischen Kunde, Büro und Baustelle verloren geht.</h2>
+          <p class="kicker">Wie BauAmpel das verhindert</p>
+          <h2>Fünf Bausteine, ein Prinzip: Der aktuelle Stand erreicht rechtzeitig, wer handelt.</h2>
         </div>
 
         <!-- Feature 1: E-Mail-Posteingang mit automatischer Zuordnung -->
         <div class="feature">
           <div class="feature__copy">
-            <p class="kicker kicker--action">E-Mail-Posteingang mit automatischer Zuordnung</p>
-            <h3>Jede Kundenmail landet automatisch am richtigen Auftraggeber.</h3>
+            <p class="kicker kicker--action">Ein Ort für Kommunikation &amp; Status</p>
+            <h3>Kommunikation und Status an einem Ort — kein Vorgang ohne Status.</h3>
             <p class="lead">
-              Eingehende Kundenmails landen an einem Ort, automatisch dem
-              Auftraggeber und der Baustelle zugeordnet. Kein Vorgang bleibt
-              liegen — Ihr Kundendienst sieht auf einen Blick, was neu ist und
-              was schon übernommen wurde.
+              Eingehende Anfragen und Statusänderungen laufen an einem Ort
+              zusammen, automatisch dem Auftraggeber und der Baustelle zugeordnet.
+              Kein Vorgang bleibt ohne Status — jeder sieht auf einen Blick, was
+              neu ist, was übernommen wurde und wo der aktuelle Stand steht.
             </p>
             <ul>
               <li>
@@ -1218,7 +1382,7 @@
               </li>
               <li>
                 <span class="check">✓</span>
-                <span><strong>Nichts bleibt liegen:</strong> Mängelrügen und Fristen werden erkannt und sichtbar gemacht.</span>
+                <span><strong>Kein Vorgang ohne Status:</strong> Mängelrügen, Fristen und offene Anliegen werden erkannt und sichtbar gemacht.</span>
               </li>
             </ul>
           </div>
@@ -1263,13 +1427,12 @@
         <div class="feature feature--flip">
           <div class="feature__copy">
             <p class="kicker kicker--action">KI-Antwortentwürfe — geprüft und freigegeben</p>
-            <h3>Auf jede Anfrage eine souveräne Antwort — in Minuten statt Tagen.</h3>
+            <h3>Rechtssichere Antworten mit echten Projektdaten — Versand erst nach Freigabe.</h3>
             <p class="lead">
-              Die KI formuliert die komplette Antwort oder füllt anwaltlich
-              vorformulierte VOB/B-Textbausteine mit Ihren echten Projektdaten.
-              Sie verbessern per Anweisung („kürzer", „förmlicher"), prüfen und
-              geben frei. Der Versand erfolgt immer erst nach menschlicher
-              Freigabe.
+              Die KI formuliert die komplette Antwort oder füllt vorformulierte
+              VOB/B-Textbausteine mit Ihren echten Projektdaten. Sie verbessern
+              per Anweisung („kürzer", „förmlicher"), prüfen und geben frei. Der
+              Versand erfolgt immer erst nach menschlicher Freigabe.
             </p>
             <ul>
               <li>
@@ -1327,18 +1490,18 @@
         <!-- Feature 3: Vom Problem zum Einsatz — in Minuten -->
         <div class="feature">
           <div class="feature__copy">
-            <p class="kicker kicker--action">Vom Problem zum Einsatz — in Minuten</p>
-            <h3>Aus der Reklamation wird ein geplanter, vorbereiteter Einsatz.</h3>
+            <p class="kicker kicker--action">Bereitschafts-Ampel — kein Grün ohne alles</p>
+            <h3>Jede Anfahrt erst bei Grün: Zugang, Material, Werkzeug, Vorgewerke.</h3>
             <p class="lead">
-              Aus einer Reklamation wird ein geplanter Einsatz: Kolonne
-              zuordnen, Termin setzen, Zugang beim Kunden per Magic-Link
-              bestätigen lassen. Schnelle Reaktion, dokumentierte Lösung — der
-              Kunde weiß jederzeit, dass sein Anliegen bearbeitet wird.
+              Vor jedem Einsatz prüft BauAmpel vier Dinge, bevor die Kolonne
+              startet: Ist der Zugang bestätigt? Ist das Material vor Ort? Ist
+              das nötige Werkzeug bzw. Gerät dabei? Sind die Vorgewerke fertig?
+              Erst wenn alles grün ist, fährt die Kolonne — nicht auf gut Glück.
             </p>
             <ul>
               <li>
                 <span class="check">✓</span>
-                <span><strong>Ein Klick vom Anliegen zum Einsatz:</strong> Kolonne zuordnen, Termin setzen — die Baustelle ist schon verknüpft.</span>
+                <span><strong>Kein Grün ohne alles:</strong> Zugang, Material, Werkzeug/Gerät und fertige Vorgewerke — erst dann steht der Einsatz auf „bereit".</span>
               </li>
               <li>
                 <span class="check">✓</span>
@@ -1346,75 +1509,18 @@
               </li>
               <li>
                 <span class="check">✓</span>
-                <span><strong>Dokumentierte Lösung:</strong> jeder Schritt vom Problem bis zur Erledigung bleibt am Vorgang nachvollziehbar.</span>
+                <span><strong>Am Vorabend statt vor Ort:</strong> fehlt ein Baustein, sieht der Disponent es rechtzeitig — nicht die Kolonne erst an der Baustelle.</span>
               </li>
             </ul>
           </div>
           <div class="feature__visual" aria-hidden="true">
             <div class="panel">
               <div class="card">
-                <p class="card__label">Reklamation → Einsatz</p>
-                <div class="inbox-row">
-                  <div>
-                    <p class="subj">Feuchtigkeit im Keller</p>
-                    <p class="from">Wohnbau Herzog · aufgenommen 09:12</p>
-                  </div>
-                  <span class="chip chip--blau">In Bearbeitung</span>
-                </div>
-                <div class="report-row"><span>Kolonne zugeordnet</span><span class="val">Krause · 2 Mann</span></div>
-                <div class="report-row"><span>Termin gesetzt</span><span class="val">Do, 10. Juli · 08:00</span></div>
-                <div class="report-row"><span>Zugang (Magic-Link)</span><span class="val ok">Vom Kunden bestätigt ✓</span></div>
-              </div>
-              <div class="card">
-                <div class="dispatch dispatch--gruen" style="border:0;border-left:4px solid var(--ampel-gruen);padding:6px 10px;background:var(--navy-50)">
-                  <div>
-                    <span class="who" style="font-size:12.5px">Wohnbau Herzog · Keller-Begutachtung</span><br />
-                    <span class="meta" style="font-size:10.5px">Do 08:00 · Kolonne Krause</span>
-                  </div>
-                  <span class="chip chip--gruen">Bereit</span>
-                </div>
-                <p style="margin-top:10px;font-size:12px;color:var(--navy-600)">
-                  Aus der Reklamation wurde in unter 2&nbsp;Minuten ein vorbereiteter Einsatz.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Feature 4: Ampel-Board & Leerfahrten-Report (flip) -->
-        <div class="feature feature--flip">
-          <div class="feature__copy">
-            <p class="kicker kicker--action">Ampel-Board &amp; Leerfahrten-Report</p>
-            <h3>Jede Anfahrt erst bei Grün: Zugang, Material, Vorgewerke.</h3>
-            <p class="lead">
-              Für jeden Einsatz prüft BauAmpel drei Dinge, bevor die Kolonne
-              startet: Hat der Kunde den Zugang bestätigt? Ist das Material auf
-              der Baustelle? Sind die Vorgewerke fertig? Jede vermiedene und
-              jede vergebliche Anfahrt wird in Euro sichtbar.
-            </p>
-            <ul>
-              <li>
-                <span class="check">✓</span>
-                <span><strong>Grün heißt fahren.</strong> Erst wenn Zugang, Material und Vorgewerke stimmen, steht der Einsatz auf „bereit".</span>
-              </li>
-              <li>
-                <span class="check">✓</span>
-                <span><strong>Material- und Vorgewerke-Status</strong> pro Einsatz, gepflegt von Büro oder Kolonne — sichtbar für alle.</span>
-              </li>
-              <li>
-                <span class="check">✓</span>
-                <span><strong>Leerfahrten-Kostenreport:</strong> jede vergebliche und jede vermiedene Anfahrt in Euro — nach Ursache, Kolonne und Monat.</span>
-              </li>
-            </ul>
-          </div>
-          <div class="feature__visual" aria-hidden="true">
-            <div class="panel">
-              <div class="card">
-                <p class="card__label">Leerfahrten-Report · Juli</p>
-                <div class="report-row"><span>Vergebliche Anfahrten</span><span class="val bad tnum">17</span></div>
-                <div class="report-row"><span>Häufigste Ursache</span><span class="val">Zugang nicht bestätigt (9×)</span></div>
-                <div class="report-row"><span>Kosten (à ~250&nbsp;€)</span><span class="val bad tnum">4.250&nbsp;€</span></div>
-                <div class="report-row"><span>Vermieden durch Ampel-Check</span><span class="val ok tnum">11 Fahrten · 2.750&nbsp;€</span></div>
+                <p class="card__label">Bereitschafts-Ampel · Fam. Werner, Badumbau</p>
+                <div class="report-row"><span>Zugang (Magic-Link)</span><span class="val ok">Bestätigt ✓</span></div>
+                <div class="report-row"><span>Material vor Ort</span><span class="val ok">Geliefert ✓</span></div>
+                <div class="report-row"><span>Werkzeug / Gerät</span><span class="val ok">Hubsteiger disponiert ✓</span></div>
+                <div class="report-row"><span>Vorgewerke fertig</span><span class="val bad">Estrich offen ✗</span></div>
               </div>
               <div class="card">
                 <div class="dispatch dispatch--rot" style="border:0;border-left:4px solid var(--ampel-rot);padding:6px 10px;background:var(--navy-50)">
@@ -1425,8 +1531,62 @@
                   <span class="chip chip--rot">Nicht bereit</span>
                 </div>
                 <p style="margin-top:10px;font-size:12px;color:var(--navy-600)">
-                  Zugang unbestätigt → Erinnerung per Magic-Link erneut gesendet, 17:42&nbsp;Uhr.
+                  Drei von vier grün — aber Vorgewerk offen. Anfahrt gestoppt,
+                  Disponent am Vorabend informiert.
                 </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 4: Ampel-Board & Leerfahrten-Report (flip) -->
+        <div class="feature feature--flip">
+          <div class="feature__copy">
+            <p class="kicker kicker--action">KI erkennt Abhängigkeiten &amp; eskaliert</p>
+            <h3>Die KI sieht den gefährdeten Einsatz, bevor daraus eine Fehlfahrt wird.</h3>
+            <p class="lead">
+              Die KI liest Aufträge, Berichte und Kommunikation und findet
+              zusätzliche Abhängigkeiten, die sonst nur der erfahrene Bauleiter
+              „im Kopf" hat. Sie warnt vor gefährdeten Einsätzen, eskaliert bei
+              Ausfall des Bauleiters an die Vertretung — und informiert notfalls
+              den Kunden automatisch.
+            </p>
+            <ul>
+              <li>
+                <span class="check">✓</span>
+                <span><strong>Zusätzliche Abhängigkeiten erkannt:</strong> „Elektro-Rohinstallation blockiert Trockenbau — Einsatz morgen ist gefährdet", bevor die Kolonne losfährt.</span>
+              </li>
+              <li>
+                <span class="check">✓</span>
+                <span><strong>Eskalation bei Ausfall:</strong> fällt der Bauleiter aus, erkennt die KI seine offenen, nicht übergebenen Vorgänge und leitet sie mit Kontext an die Vertretung.</span>
+              </li>
+              <li>
+                <span class="check">✓</span>
+                <span><strong>Kunde bleibt informiert:</strong> lässt sich nicht rechtzeitig eskalieren, geht automatisch eine freundliche Zwischennachricht raus — der Kunde wartet nicht im Ungewissen.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="feature__visual" aria-hidden="true">
+            <div class="panel">
+              <div class="card">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+                  <p class="card__label">KI-Warnung · gefährdeter Einsatz</p>
+                  <span class="chip chip--rot">Morgen 07:00</span>
+                </div>
+                <div class="mockup__alert" style="margin-top:10px">
+                  <span class="blip"></span>
+                  Trockenbau Los 3 gefährdet: Elektro-Rohinstallation noch offen.
+                </div>
+                <p style="margin-top:10px;font-size:12px;color:var(--navy-600)">
+                  <span class="chip chip--blau">KI: Abhängigkeit erkannt</span>&nbsp;
+                  Vorgewerk blockiert den Folgeschritt — Anfahrt gestoppt.
+                </p>
+              </div>
+              <div class="card">
+                <p class="card__label">Bauleiter Krämer · abwesend (Urlaub)</p>
+                <div class="report-row"><span>Offene Vorgänge erkannt</span><span class="val bad tnum">3</span></div>
+                <div class="report-row"><span>Eskaliert an Vertretung</span><span class="val ok">Hoffmann · mit Kontext ✓</span></div>
+                <div class="report-row"><span>Kundenanfrage Herzog</span><span class="val ok">Zwischennachricht gesendet ✓</span></div>
               </div>
             </div>
           </div>
@@ -1435,18 +1595,18 @@
         <!-- Feature 5: Kolonnen-Bericht vom Handy -->
         <div class="feature">
           <div class="feature__copy">
-            <p class="kicker kicker--action">Kolonnen-Bericht vom Handy</p>
-            <h3>Der Bericht entsteht auf der Baustelle — nicht abends am Küchentisch.</h3>
+            <p class="kicker kicker--action">Kolonnen-Bericht &amp; Leerfahrten-Report</p>
+            <h3>Soll/Ist und Fotos von der Baustelle — jede Fahrt in Euro belegt.</h3>
             <p class="lead">
-              Die Kolonne dokumentiert direkt vor Ort: erledigte LV-Positionen
-              antippen, Vorher-/Nachher-Fotos aufnehmen, kurz aufs Mikrofon
-              sprechen. LV-Positionen, Vorher/Nachher-Fotos, Sprachnotiz —
-              lückenloser Nachweis, auch für die QDF-Dokumentation.
+              Die Kolonne dokumentiert direkt vor Ort: LV-Positionen mit
+              Soll/Ist-Menge, Vorher-/Nachher-Fotos als QDF-Nachweis, kurz aufs
+              Mikrofon sprechen. Und jede vermiedene wie jede vergebliche Anfahrt
+              wird in Euro sichtbar — nach Ursache, Kolonne und Monat.
             </p>
             <ul>
               <li>
                 <span class="check">✓</span>
-                <span><strong>LV-Positionen abhaken</strong> statt Zettelwirtschaft — die Mengen landen direkt beim Projekt.</span>
+                <span><strong>LV-Positionen mit Soll/Ist:</strong> weicht die verbaute Menge vom Soll ab, wird die Position nicht als „erledigt" geschlossen.</span>
               </li>
               <li>
                 <span class="check">✓</span>
@@ -1454,7 +1614,7 @@
               </li>
               <li>
                 <span class="check">✓</span>
-                <span><strong>Sprachnotiz mit KI-Strukturierung:</strong> aus 40 Sekunden Freitext wird ein gegliederter Tagesbericht.</span>
+                <span><strong>Leerfahrten-Kostenreport:</strong> jede vermiedene und jede vergebliche Anfahrt in Euro — nach Ursache, Kolonne und Monat.</span>
               </li>
             </ul>
           </div>
@@ -1464,9 +1624,9 @@
                 <div class="phone__screen">
                   <div class="phone__bar">Bericht · EFH Brandt, 9. Juli</div>
                   <div class="phone__body">
-                    <div class="lv-row"><span class="pos">Pos. 4.1</span><span>Abwasserleitung DN 100 — 12 m</span><span class="chip chip--gruen">✓</span></div>
-                    <div class="lv-row"><span class="pos">Pos. 4.3</span><span>Wanddurchbruch — 2 Stk.</span><span class="chip chip--gruen">✓</span></div>
-                    <div class="lv-row"><span class="pos">Pos. 5.2</span><span>Rohmontage Waschtisch</span><span class="chip chip--gelb">teilw.</span></div>
+                    <div class="lv-row"><span class="pos">Pos. 4.1</span><span>Abwasser DN 100 — Soll 12&nbsp;m / Ist 12&nbsp;m</span><span class="chip chip--gruen">✓</span></div>
+                    <div class="lv-row"><span class="pos">Pos. 4.3</span><span>Wanddurchbruch — Soll 2 / Ist 2</span><span class="chip chip--gruen">✓</span></div>
+                    <div class="lv-row"><span class="pos">Pos. 6.1</span><span>Decke — Soll 2 Lagen / Ist 1 Lage</span><span class="chip chip--rot">Abweichung</span></div>
                     <div class="photo-grid">
                       <div class="photo-ph" data-label="Vorher · 07:14"></div>
                       <div class="photo-ph" data-label="Nachher · 15:38"></div>
@@ -1479,8 +1639,12 @@
                       <span>0:42 · KI strukturiert&hellip;</span>
                     </div>
                     <div style="border-radius:8px;background:var(--action-tint);border:1px solid rgba(0,82,204,0.2);padding:9px 11px;font-size:10.5px;color:var(--navy-700)">
-                      <strong style="color:var(--action)">KI-Entwurf:</strong> Rohinstallation EG abgeschlossen,
-                      Waschtisch OG wartet auf Trockenbau. Mehraufwand Durchbruch: 1,5&nbsp;h.
+                      <strong style="color:var(--action)">KI:</strong> Pos.&nbsp;6.1 nur 1 statt 2 Lagen —
+                      Ist weicht vom Soll ab, Position bleibt offen zur Prüfung.
+                    </div>
+                    <div class="lv-row" style="justify-content:space-between">
+                      <span class="pos">Leerfahrten Juli</span>
+                      <span>11 vermieden · <strong style="color:var(--ok)">2.750&nbsp;€</strong></span>
                     </div>
                   </div>
                 </div>
@@ -1496,26 +1660,29 @@
       <div class="container roi__grid">
         <div>
           <p class="kicker">Die Rechnung</p>
-          <h2>Schnellere Antworten, zufriedenere Kunden — und jede vermiedene Leerfahrt ≈ 250&nbsp;€.</h2>
+          <h2>Ein einziger verhinderter Fehler zahlt BauAmpel für ein Jahr.</h2>
           <p class="roi__lead">
-            Ihr Kundendienst spart Stunden pro Woche; schon eine vermiedene
-            Leerfahrt pro Woche ≈ 12.500&nbsp;€ im Jahr. Anfragen werden schneller
-            beantwortet, Reklamationen zügig zum Einsatz — und jede vergebliche
-            Anfahrt, die BauAmpel verhindert, spart rund 250&nbsp;€ an Transporter,
-            Lohn und verlorener Zeit.
+            Auf einer einzigen Baustelle: über 20.000&nbsp;€ vermeidbare
+            Fehlfahrten und Nacharbeiten — die 400-km-Fahrt nach Absage, die
+            450-km-Schwertransport-Rückfahrt, der doppelte Gerüstauf- und -abbau,
+            die Decken-Nacharbeit. Nicht „eine Leerfahrt pro Woche", sondern
+            einzelne teure Koordinationsfehler, von denen jeder für sich die
+            Jahresgebühr übersteigt. Bei rund 220 Häusern im Jahr skaliert das
+            erheblich.
           </p>
         </div>
         <div class="roi__card">
-          <p class="card__label">Beispielrechnung · Betrieb mit 3 Kolonnen</p>
-          <div class="report-row"><span>Zeitersparnis Kundendienst pro Woche</span><span class="val ok tnum">Stunden</span></div>
-          <div class="report-row"><span>Kosten pro Leerfahrt (konservativ)</span><span class="val tnum">~250&nbsp;€</span></div>
-          <div class="report-row"><span>Vermiedene Leerfahrten pro Woche</span><span class="val tnum">1</span></div>
-          <div class="report-row"><span>Ersparnis Leerfahrten pro Jahr</span><span class="val ok tnum">≈ 12.500&nbsp;€</span></div>
+          <p class="card__label">Eine Baustelle · vermeidbare Kosten</p>
+          <div class="report-row"><span>400&nbsp;km Anfahrt trotz Absage</span><span class="val bad tnum">~2.000&nbsp;€</span></div>
+          <div class="report-row"><span>450&nbsp;km Schwertransport zurück</span><span class="val bad tnum">mehrere&nbsp;1.000&nbsp;€</span></div>
+          <div class="report-row"><span>Gerüst zweimal auf-/abgebaut</span><span class="val bad tnum">vierstellig</span></div>
+          <div class="report-row"><span>Decken-Nacharbeit &amp; Zweitfahrten</span><span class="val bad tnum">vierstellig</span></div>
+          <div class="report-row"><span>Summe auf einer Baustelle</span><span class="val bad tnum">&gt; 20.000&nbsp;€</span></div>
           <p class="smallprint">
-            Konservativ gerechnet: nur eine vermiedene Fahrt pro Woche über alle
-            Kolonnen (1 × 250 € × 50 Wochen). Nicht eingerechnet: die eingesparten
-            Kundendienst-Stunden, schnellere Antworten auf Mängelrügen und sauber
-            belegte Berichte bei Streitfällen.
+            Reale, anonymisierte Fälle von einer einzigen Baustelle. Die relevante
+            Zahl ist nicht die einzelne Leerfahrt, sondern der einzelne teure
+            Koordinationsfehler — schon einer davon übersteigt die Jahresgebühr.
+            Bei ~220 Häusern/Jahr skaliert das erheblich.
           </p>
         </div>
       </div>
@@ -1525,11 +1692,11 @@
     <section class="cta" id="kontakt">
       <div class="container">
         <p class="kicker">Selbst ausprobieren</p>
-        <h2>Sehen Sie, wie schnell aus einer Anfrage eine fertige Antwort wird.</h2>
+        <h2>Sehen Sie, wie der aktuelle Stand die Kolonne erreicht — bevor sie losfährt.</h2>
         <p class="lead">
           Die Live-Sandbox ist das echte Produkt mit realistischen
-          Beispieldaten — klicken Sie sich durch den Posteingang und die
-          KI-Antwortentwürfe, ohne Registrierung. Oder fragen Sie direkt das
+          Beispieldaten — klicken Sie sich durch Posteingang, Bereitschafts-Ampel
+          und die KI-Warnungen, ohne Registrierung. Oder fragen Sie direkt das
           Pilotprogramm für Ihren Betrieb an.
         </p>
         <div class="cta__buttons">
@@ -1557,9 +1724,10 @@
               <span class="brand__word">Bau<em>Ampel</em></span>
             </span>
             <p>
-              KI-gestützter Kundendienst für Bauunternehmen und
-              Handwerksbetriebe in der DACH-Region. Arbeitet neben Ihrer
-              bestehenden Software.
+              KI-gestützte Baustellen-Koordination für Bauunternehmen und
+              Handwerksbetriebe in der DACH-Region. Der aktuelle Stand erreicht,
+              wer handelt — bevor er losfährt. Arbeitet neben Ihrer bestehenden
+              Software.
             </p>
           </div>
           <nav class="footer__links" aria-label="Rechtliches">
