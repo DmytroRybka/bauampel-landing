@@ -1,0 +1,1303 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BauAmpel — Schluss mit Leerfahrten. Einsatz-Koordination für Bau &amp; Handwerk.</title>
+    <meta
+      name="description"
+      content="BauAmpel prüft Zugang, Material und Vorgewerke, bevor die Kolonne fährt. Ampel-Board gegen Leerfahrten, mobile Kolonnen-Berichte, rechtssichere Antwortentwürfe und E-Mail-Posteingang — für Bauunternehmen und Handwerksbetriebe in der DACH-Region."
+    />
+    <meta property="og:title" content="BauAmpel — Schluss mit Leerfahrten" />
+    <meta
+      property="og:description"
+      content="Jede Kolonne fährt nur los, wenn die Ampel grün ist. BauAmpel prüft Zugang, Material und Vorgewerke — bevor die Kolonne fährt."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ============================================================
+         BauAmpel landing — self-contained, no JS.
+         Palette mirrors the product (Atlassian-style navy scale +
+         action blue) plus the three Ampel colors.
+         ============================================================ */
+      :root {
+        --navy-50:  #F8F9FB;
+        --navy-100: #EBECF0;
+        --navy-200: #DFE1E6;
+        --navy-300: #C1C7D0;
+        --navy-400: #7A869A;
+        --navy-500: #5E6C84;
+        --navy-600: #42526E;
+        --navy-700: #253858;
+        --navy-800: #172B4D;
+        --navy-900: #091E42;
+        --action:       #0052CC;
+        --action-hover: #0747A6;
+        --action-tint:  #F0F5FF;
+        --ampel-rot:   #E5484D;
+        --ampel-gelb:  #F5A623;
+        --ampel-gruen: #30A46C;
+        --ok:   #059669;
+        --bad:  #DC2626;
+      }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+        font-feature-settings: 'cv11', 'ss01';
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        color: var(--navy-900);
+        background: #fff;
+        line-height: 1.5;
+      }
+
+      a { color: inherit; text-decoration: none; }
+      ul { list-style: none; }
+      .tnum { font-variant-numeric: tabular-nums; }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      /* ---------- shared type ---------- */
+      .kicker {
+        font-size: 13px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: var(--navy-500);
+      }
+      .kicker--action { color: var(--action); }
+      h2 {
+        margin-top: 12px;
+        font-size: clamp(28px, 4.5vw, 40px);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        line-height: 1.12;
+      }
+
+      /* ---------- buttons ---------- */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        height: 48px;
+        padding: 0 24px;
+        border-radius: 6px;
+        font-size: 15px;
+        font-weight: 600;
+        transition: background-color 0.15s ease, border-color 0.15s ease;
+        white-space: nowrap;
+      }
+      .btn--dark  { background: var(--navy-900); color: #fff; }
+      .btn--dark:hover { background: var(--navy-800); }
+      .btn--action { background: var(--action); color: #fff; }
+      .btn--action:hover { background: var(--action-hover); }
+      .btn--ghost {
+        background: #fff;
+        color: var(--navy-900);
+        border: 1px solid var(--navy-200);
+      }
+      .btn--ghost:hover { background: var(--navy-50); }
+      .btn--outline-light {
+        background: rgba(255, 255, 255, 0.06);
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+      }
+      .btn--outline-light:hover { background: rgba(255, 255, 255, 0.12); }
+
+      /* ---------- brand ---------- */
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .brand__word {
+        font-size: 24px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        line-height: 1;
+      }
+      .brand__word em {
+        font-style: italic;
+        font-weight: 600;
+        color: var(--action);
+      }
+      .brand--footer .brand__word { font-size: 17px; }
+      .brand--on-dark .brand__word { color: #fff; }
+      .brand--on-dark .brand__word em { color: #579DFF; }
+
+      /* ---------- header ---------- */
+      header .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 20px;
+        padding-bottom: 20px;
+      }
+      .nav-links {
+        display: none;
+        align-items: center;
+        gap: 28px;
+      }
+      .nav-links a {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--navy-600);
+      }
+      .nav-links a:hover { color: var(--navy-900); }
+      .nav-cta {
+        display: inline-flex;
+        align-items: center;
+        height: 40px;
+        padding: 0 16px;
+        border: 1px solid var(--navy-200);
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .nav-cta:hover { background: var(--navy-50); }
+      @media (min-width: 860px) {
+        .nav-links { display: flex; }
+      }
+
+      /* ---------- hero ---------- */
+      .hero {
+        position: relative;
+        overflow: hidden;
+        background:
+          radial-gradient(900px 540px at 78% 20%, rgba(0, 82, 204, 0.10), transparent 65%),
+          radial-gradient(560px 360px at 12% 8%, rgba(48, 164, 108, 0.07), transparent 70%),
+          #fff;
+      }
+      .hero__grid {
+        display: grid;
+        gap: 48px;
+        padding-top: 48px;
+        padding-bottom: 64px;
+      }
+      @media (min-width: 980px) {
+        .hero__grid {
+          grid-template-columns: minmax(0, 46fr) minmax(0, 54fr);
+          align-items: center;
+          gap: 56px;
+          padding-top: 72px;
+          padding-bottom: 96px;
+        }
+      }
+      .hero h1 {
+        margin-top: 24px;
+        font-size: clamp(34px, 5vw, 48px);
+        font-weight: 800;
+        line-height: 1.06;
+        letter-spacing: -0.028em;
+      }
+      .hero h1 .gruen { color: var(--ampel-gruen); }
+      .hero__badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 5px 14px 5px 8px;
+        border: 1px solid rgba(0, 82, 204, 0.25);
+        border-radius: 9999px;
+        background: rgba(240, 245, 255, 0.7);
+        font-size: 12.5px;
+        font-weight: 600;
+        color: var(--action);
+      }
+      .hero__badge .dots { display: inline-flex; gap: 3px; }
+      .hero__badge .dots span {
+        width: 7px; height: 7px; border-radius: 9999px;
+      }
+      .hero__pain {
+        margin-top: 20px;
+        max-width: 32em;
+        font-size: 15.5px;
+        font-weight: 600;
+        line-height: 1.4;
+        color: var(--navy-900);
+      }
+      .hero__lead {
+        margin-top: 16px;
+        max-width: 34em;
+        font-size: 16px;
+        line-height: 1.6;
+        color: var(--navy-600);
+      }
+      .hero__cta {
+        margin-top: 32px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 16px;
+      }
+      .hero__cta-note { margin-top: 12px; font-size: 12.5px; color: var(--navy-500); }
+      .hero__pills {
+        margin-top: 28px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        column-gap: 16px;
+        row-gap: 6px;
+        font-size: 13px;
+        color: var(--navy-500);
+      }
+      .hero__pills .pill { display: inline-flex; align-items: center; gap: 6px; }
+      .hero__pills .dot-ok {
+        width: 6px; height: 6px; border-radius: 9999px; background: var(--ok);
+      }
+      .hero__pills .sep { color: var(--navy-300); }
+
+      /* ---------- browser-chrome product mockup ---------- */
+      .mockup-frame {
+        border-radius: 16px;
+        background: rgba(0, 82, 204, 0.08);
+        padding: 12px;
+        box-shadow: 0 36px 96px rgba(0, 82, 204, 0.18);
+        border: 1px solid rgba(0, 82, 204, 0.25);
+      }
+      .mockup {
+        overflow: hidden;
+        border-radius: 10px;
+        background: #fff;
+        font-size: 11px;
+      }
+      .mockup * { line-height: 1.35; }
+      .mockup__chrome {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 9px 14px;
+        background: var(--navy-50);
+        border-bottom: 1px solid var(--navy-100);
+      }
+      .mockup__chrome .light { width: 10px; height: 10px; border-radius: 9999px; }
+      .mockup__url {
+        margin-left: 10px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 2px 12px;
+        border-radius: 6px;
+        background: #fff;
+        border: 1px solid var(--navy-200);
+        font-size: 10.5px;
+        color: var(--navy-500);
+      }
+      .mockup__body {
+        display: grid;
+        grid-template-columns: 148px 1fr;
+        min-height: 430px;
+      }
+      /* sidebar */
+      .mockup__side {
+        background: var(--navy-900);
+        color: rgba(255, 255, 255, 0.75);
+        padding: 14px 10px;
+      }
+      .mockup__side .brand__word { font-size: 13px; color: #fff; }
+      .mockup__side .brand__word em { color: #579DFF; }
+      .mockup__nav { margin-top: 16px; display: grid; gap: 2px; }
+      .mockup__nav span {
+        display: block;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 10.5px;
+        font-weight: 500;
+      }
+      .mockup__nav span.active {
+        background: rgba(255, 255, 255, 0.12);
+        color: #fff;
+        font-weight: 600;
+      }
+      .mockup__nav .cnt {
+        float: right;
+        padding: 0 5px;
+        border-radius: 8px;
+        background: var(--ampel-rot);
+        color: #fff;
+        font-size: 9px;
+        font-weight: 700;
+      }
+      /* main pane */
+      .mockup__main { padding: 12px 14px; background: var(--navy-50); }
+      .mockup__title {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--navy-900);
+        letter-spacing: -0.01em;
+      }
+      .mockup__ki {
+        margin-top: 8px;
+        display: flex;
+        gap: 8px;
+        align-items: flex-start;
+        padding: 8px 10px;
+        border-radius: 7px;
+        background: var(--action-tint);
+        border: 1px solid rgba(0, 82, 204, 0.22);
+        color: var(--navy-700);
+        font-size: 10px;
+      }
+      .mockup__ki .tag {
+        flex-shrink: 0;
+        padding: 1px 7px;
+        border-radius: 9999px;
+        background: var(--action);
+        color: #fff;
+        font-size: 8.5px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .mockup__alert {
+        margin-top: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 10px;
+        border-radius: 7px;
+        background: rgba(229, 72, 77, 0.10);
+        border: 1px solid rgba(229, 72, 77, 0.35);
+        color: #B3261E;
+        font-size: 10.5px;
+        font-weight: 600;
+      }
+      .mockup__alert .blip {
+        width: 8px; height: 8px; border-radius: 9999px;
+        background: var(--ampel-rot); flex-shrink: 0;
+      }
+      .mockup__kpis {
+        margin-top: 10px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+      }
+      .mockup__kpi {
+        padding: 8px 9px;
+        border-radius: 7px;
+        background: #fff;
+        border: 1px solid var(--navy-100);
+      }
+      .mockup__kpi .v {
+        display: block;
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--navy-900);
+        font-variant-numeric: tabular-nums;
+      }
+      .mockup__kpi .v.rot { color: var(--ampel-rot); }
+      .mockup__kpi .v.gruen { color: var(--ampel-gruen); }
+      .mockup__kpi .l {
+        display: block;
+        margin-top: 1px;
+        font-size: 8.5px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--navy-400);
+      }
+      .mockup__seclabel {
+        margin-top: 12px;
+        font-size: 9px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--navy-500);
+      }
+      .mockup__cards { margin-top: 6px; display: grid; gap: 6px; }
+      .dispatch {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 8px 10px;
+        border-radius: 7px;
+        background: #fff;
+        border: 1px solid var(--navy-100);
+        border-left-width: 4px;
+      }
+      .dispatch--gruen { border-left-color: var(--ampel-gruen); }
+      .dispatch--gelb  { border-left-color: var(--ampel-gelb); }
+      .dispatch--rot   { border-left-color: var(--ampel-rot); }
+      .dispatch .who {
+        font-size: 10.5px;
+        font-weight: 600;
+        color: var(--navy-900);
+      }
+      .dispatch .meta { font-size: 9px; color: var(--navy-500); }
+      .dispatch .checks {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        flex-shrink: 0;
+        font-size: 8.5px;
+        color: var(--navy-400);
+      }
+      .dispatch .checks i {
+        width: 9px; height: 9px; border-radius: 9999px; font-style: normal;
+      }
+      .i-gruen { background: var(--ampel-gruen); }
+      .i-gelb  { background: var(--ampel-gelb); }
+      .i-rot   { background: var(--ampel-rot); }
+      .i-grau  { background: var(--navy-200); }
+      @media (max-width: 560px) {
+        .mockup__body { grid-template-columns: 1fr; }
+        .mockup__side { display: none; }
+        .mockup__kpis { grid-template-columns: repeat(2, 1fr); }
+      }
+
+      /* ---------- trust strip ---------- */
+      .trust {
+        border-top: 1px solid var(--navy-100);
+        border-bottom: 1px solid var(--navy-100);
+        padding: 36px 0;
+        text-align: center;
+      }
+      .trust p:first-child {
+        font-size: 12.5px;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: var(--navy-500);
+      }
+      .trust__logos {
+        margin-top: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        column-gap: 40px;
+        row-gap: 10px;
+        font-size: 17px;
+        font-weight: 600;
+        color: var(--navy-400);
+      }
+      .trust__logos .sep { color: var(--navy-200); }
+
+      /* ---------- feature blocks ---------- */
+      .features { padding: 80px 0 24px; }
+      .features__intro { max-width: 46em; }
+      .feature {
+        display: grid;
+        gap: 40px;
+        padding: 56px 0;
+        align-items: center;
+      }
+      @media (min-width: 900px) {
+        .feature { grid-template-columns: 1fr 1fr; gap: 72px; padding: 72px 0; }
+        .feature--flip .feature__copy { order: 2; }
+        .feature--flip .feature__visual { order: 1; }
+      }
+      .feature h3 {
+        margin-top: 12px;
+        font-size: clamp(24px, 3.4vw, 32px);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+      }
+      .feature p.lead {
+        margin-top: 16px;
+        font-size: 16px;
+        line-height: 1.65;
+        color: var(--navy-600);
+      }
+      .feature ul { margin-top: 20px; display: grid; gap: 12px; }
+      .feature li {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        font-size: 15px;
+        color: var(--navy-700);
+      }
+      .feature li strong { color: var(--navy-900); }
+      .check {
+        flex-shrink: 0;
+        margin-top: 2px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px; height: 20px;
+        border-radius: 9999px;
+        background: var(--action-tint);
+        color: var(--action);
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .feature .smallprint {
+        margin-top: 18px;
+        font-size: 12px;
+        line-height: 1.55;
+        color: var(--navy-500);
+      }
+
+      /* feature visual panels */
+      .panel {
+        border-radius: 14px;
+        border: 1px solid var(--navy-100);
+        background: var(--navy-50);
+        padding: 24px;
+      }
+      .card {
+        border-radius: 10px;
+        background: #fff;
+        border: 1px solid var(--navy-100);
+        padding: 14px 16px;
+        box-shadow: 0 1px 3px rgba(9, 30, 66, 0.06);
+      }
+      .card + .card { margin-top: 10px; }
+      .card__label {
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--navy-500);
+      }
+      .chip {
+        display: inline-block;
+        padding: 2px 9px;
+        border-radius: 9999px;
+        font-size: 10.5px;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+      }
+      .chip--gruen { background: rgba(48, 164, 108, 0.12); color: #1E7A4D; }
+      .chip--gelb  { background: rgba(245, 166, 35, 0.15); color: #9A6700; }
+      .chip--rot   { background: rgba(229, 72, 77, 0.12); color: #B3261E; }
+      .chip--blau  { background: var(--action-tint); color: var(--action); }
+      .chip--grau  { background: var(--navy-100); color: var(--navy-600); }
+
+      /* leerfahrten report rows */
+      .report-row {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 9px 0;
+        border-bottom: 1px solid var(--navy-100);
+        font-size: 13.5px;
+        color: var(--navy-600);
+      }
+      .report-row:last-child { border-bottom: 0; }
+      .report-row .val { font-weight: 600; color: var(--navy-900); }
+      .report-row .val.bad { color: var(--bad); }
+      .report-row .val.ok  { color: var(--ok); }
+
+      /* phone mockup */
+      .phone-wrap { display: flex; justify-content: center; }
+      .phone {
+        width: 100%;
+        max-width: 300px;
+        border-radius: 32px;
+        background: var(--navy-900);
+        padding: 10px;
+        box-shadow: 0 20px 60px rgba(9, 30, 66, 0.25), 0 4px 12px rgba(9, 30, 66, 0.15);
+      }
+      .phone__screen {
+        border-radius: 24px;
+        overflow: hidden;
+        background: #fff;
+        font-size: 12px;
+      }
+      .phone__bar {
+        padding: 12px 16px 10px;
+        background: var(--navy-900);
+        color: #fff;
+        font-size: 12.5px;
+        font-weight: 600;
+      }
+      .phone__body { padding: 14px 14px 18px; display: grid; gap: 10px; }
+      .lv-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 8px 10px;
+        border-radius: 8px;
+        background: var(--navy-50);
+        border: 1px solid var(--navy-100);
+        font-size: 11px;
+        color: var(--navy-700);
+      }
+      .lv-row .pos { font-weight: 600; color: var(--navy-900); white-space: nowrap; }
+      .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+      .photo-ph {
+        position: relative;
+        border-radius: 8px;
+        height: 64px;
+        background:
+          linear-gradient(160deg, var(--navy-200), var(--navy-100));
+        border: 1px solid var(--navy-200);
+      }
+      .photo-ph::after {
+        content: attr(data-label);
+        position: absolute;
+        left: 6px; bottom: 5px;
+        padding: 1px 7px;
+        border-radius: 9999px;
+        background: rgba(9, 30, 66, 0.75);
+        color: #fff;
+        font-size: 8.5px;
+        font-weight: 600;
+      }
+      .voice {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 9px 12px;
+        border-radius: 9999px;
+        background: var(--action-tint);
+        border: 1px solid rgba(0, 82, 204, 0.22);
+        color: var(--action);
+        font-size: 11px;
+        font-weight: 600;
+      }
+      .voice .wave { display: inline-flex; align-items: center; gap: 2px; }
+      .voice .wave i {
+        width: 3px;
+        border-radius: 2px;
+        background: var(--action);
+        font-style: normal;
+      }
+
+      /* inbox rows */
+      .inbox-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 11px 0;
+        border-bottom: 1px solid var(--navy-100);
+      }
+      .inbox-row:last-child { border-bottom: 0; }
+      .inbox-row .subj { font-size: 13.5px; font-weight: 600; color: var(--navy-900); }
+      .inbox-row .from { font-size: 11.5px; color: var(--navy-500); }
+
+      /* draft doc lines */
+      .doc-line {
+        height: 9px;
+        border-radius: 4px;
+        background: var(--navy-100);
+        margin-top: 8px;
+      }
+      .doc-line--fill { background: rgba(0, 82, 204, 0.18); }
+
+      /* ---------- ROI band ---------- */
+      .roi { background: var(--navy-50); padding: 80px 0; }
+      .roi__grid { display: grid; gap: 48px; }
+      @media (min-width: 900px) {
+        .roi__grid { grid-template-columns: 1fr 1fr; align-items: center; gap: 72px; }
+      }
+      .roi__lead {
+        margin-top: 20px;
+        font-size: 16.5px;
+        line-height: 1.65;
+        color: var(--navy-600);
+      }
+      .roi__card {
+        border-radius: 14px;
+        border: 1px solid var(--navy-100);
+        background: #fff;
+        padding: 28px;
+        box-shadow: 0 4px 16px rgba(9, 30, 66, 0.06);
+      }
+      .roi__card .smallprint {
+        margin-top: 18px;
+        font-size: 12px;
+        line-height: 1.55;
+        color: var(--navy-500);
+      }
+
+      /* ---------- CTA ---------- */
+      .cta {
+        background: var(--navy-900);
+        color: #fff;
+        padding: 88px 0;
+        text-align: center;
+      }
+      .cta h2 { color: #fff; }
+      .cta .kicker { color: rgba(255, 255, 255, 0.6); }
+      .cta p.lead {
+        margin: 24px auto 0;
+        max-width: 36em;
+        font-size: 17px;
+        line-height: 1.65;
+        color: rgba(255, 255, 255, 0.75);
+      }
+      .cta__buttons {
+        margin-top: 36px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px;
+      }
+      .cta__note { margin-top: 16px; font-size: 12.5px; color: rgba(255, 255, 255, 0.55); }
+
+      /* ---------- footer ---------- */
+      footer { border-top: 1px solid var(--navy-100); padding: 40px 0; }
+      .footer__grid {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+      .footer__left p {
+        margin-top: 10px;
+        max-width: 34em;
+        font-size: 13px;
+        line-height: 1.55;
+        color: var(--navy-500);
+      }
+      .footer__links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        font-size: 13px;
+        color: var(--navy-600);
+      }
+      .footer__links a:hover { color: var(--action); }
+      .footer__legal {
+        margin-top: 28px;
+        padding-top: 20px;
+        border-top: 1px solid var(--navy-100);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 8px;
+        font-size: 12px;
+        color: var(--navy-500);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- =========================== NAV =========================== -->
+    <header>
+      <div class="container">
+        <a href="#" class="brand" aria-label="BauAmpel Startseite">
+          <svg width="32" height="32" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+            <circle cx="14" cy="5.5" r="3.4" fill="#E5484D" />
+            <circle cx="14" cy="14" r="3.4" fill="#F5A623" />
+            <circle cx="14" cy="22.5" r="3.4" fill="#30A46C" />
+          </svg>
+          <span class="brand__word">Bau<em>Ampel</em></span>
+        </a>
+
+        <nav class="nav-links" aria-label="Hauptnavigation">
+          <a href="#produkt">Produkt</a>
+          <a href="#funktionen">Funktionen</a>
+          <a href="#roi">Wirtschaftlichkeit</a>
+          <a href="#kontakt">Pilotprogramm</a>
+        </nav>
+
+        <a class="nav-cta" href="#kontakt">Sandbox testen</a>
+      </div>
+    </header>
+
+    <!-- =========================== HERO =========================== -->
+    <section class="hero" id="produkt">
+      <div class="container hero__grid">
+        <!-- LEFT: pitch -->
+        <div>
+          <span class="hero__badge">
+            <span class="dots" aria-hidden="true">
+              <span style="background:#E5484D"></span>
+              <span style="background:#F5A623"></span>
+              <span style="background:#30A46C"></span>
+            </span>
+            Einsatz-Koordination für Bau &amp; Handwerk
+          </span>
+
+          <h1>
+            Schluss mit Leerfahrten. Jede Kolonne fährt nur los, wenn die Ampel
+            <span class="gruen">grün</span> ist.
+          </h1>
+
+          <p class="hero__pain">
+            Jede vergebliche Anfahrt kostet Sie rund 250&nbsp;€ — Fahrzeug, Lohn
+            und ein verlorener Arbeitstag der Kolonne.
+          </p>
+
+          <p class="hero__lead">
+            BauAmpel prüft Zugang, Material und Vorgewerke — bevor die Kolonne
+            fährt. Der Kunde bestätigt den Zugang per Magic-Link, die Ampel
+            springt auf Grün, und Ihre Disposition sieht jeden Morgen auf einen
+            Blick, welche Einsätze wirklich bereit sind.
+          </p>
+
+          <div class="hero__cta">
+            <a class="btn btn--dark" href="#">
+              <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M4 2.5v9l7-4.5-7-4.5z" fill="currentColor"/></svg>
+              Live-Sandbox testen
+            </a>
+            <a class="btn btn--ghost" href="mailto:amid.fish@gmail.com?subject=BauAmpel%20Pilotprogramm">Pilotprogramm anfragen&nbsp;→</a>
+          </div>
+          <p class="hero__cta-note">Ohne Registrierung. Ohne Installation.</p>
+
+          <p class="hero__pills">
+            <span class="pill"><span class="dot-ok"></span>Kein Login nötig</span>
+            <span class="sep">·</span>
+            <span class="pill"><span class="dot-ok"></span>Realistische Beispieldaten</span>
+            <span class="sep">·</span>
+            <span class="pill"><span class="dot-ok"></span>DSGVO-konform gehostet</span>
+          </p>
+        </div>
+
+        <!-- RIGHT: CSS-built product mockup -->
+        <div aria-hidden="true">
+          <div class="mockup-frame">
+            <div class="mockup">
+              <!-- browser chrome -->
+              <div class="mockup__chrome">
+                <span class="light" style="background:#FF5F57"></span>
+                <span class="light" style="background:#FEBC2E"></span>
+                <span class="light" style="background:#28C840"></span>
+                <span class="mockup__url">
+                  <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                  </svg>
+                  app.bauampel.de
+                </span>
+              </div>
+              <div class="mockup__body">
+                <!-- sidebar -->
+                <div class="mockup__side">
+                  <span class="brand" style="gap:6px">
+                    <svg width="16" height="16" viewBox="0 0 28 28" fill="none">
+                      <circle cx="14" cy="5.5" r="3.4" fill="#E5484D" />
+                      <circle cx="14" cy="14" r="3.4" fill="#F5A623" />
+                      <circle cx="14" cy="22.5" r="3.4" fill="#30A46C" />
+                    </svg>
+                    <span class="brand__word">Bau<em>Ampel</em></span>
+                  </span>
+                  <nav class="mockup__nav">
+                    <span class="active">Übersicht</span>
+                    <span>Planung</span>
+                    <span>Projekte</span>
+                    <span>Auftraggeber</span>
+                    <span>Kolonnen</span>
+                    <span>Leerfahrten</span>
+                    <span>Reklamationen <span class="cnt">2</span></span>
+                    <span>Posteingang <span class="cnt">5</span></span>
+                  </nav>
+                </div>
+                <!-- main -->
+                <div class="mockup__main">
+                  <p class="mockup__title">Übersicht · Mittwoch, 9. Juli</p>
+
+                  <div class="mockup__ki">
+                    <span class="tag">KI</span>
+                    <span>
+                      <strong>Zusammenfassung:</strong> 12 Einsätze morgen geplant, 9 bereit.
+                      Bei Fam. Werner fehlt die Zugangsbestätigung, Baustelle Lindenhof wartet
+                      auf Estrich-Freigabe des Vorgewerks.
+                    </span>
+                  </div>
+
+                  <div class="mockup__alert">
+                    <span class="blip"></span>
+                    3 Einsätze morgen nicht bereit — Kolonnen noch nicht losschicken
+                  </div>
+
+                  <div class="mockup__kpis">
+                    <div class="mockup__kpi"><span class="v">12</span><span class="l">Einsätze morgen</span></div>
+                    <div class="mockup__kpi"><span class="v gruen">9</span><span class="l">Bereit</span></div>
+                    <div class="mockup__kpi"><span class="v rot">3</span><span class="l">Blockiert</span></div>
+                    <div class="mockup__kpi"><span class="v">4.250&nbsp;€</span><span class="l">Leerfahrten Juli</span></div>
+                  </div>
+
+                  <p class="mockup__seclabel">Einsätze · Donnerstag, 10. Juli</p>
+                  <div class="mockup__cards">
+                    <div class="dispatch dispatch--gruen">
+                      <div>
+                        <span class="who">Kolonne Yilmaz · EFH Brandt, Sanitär-Rohinstallation</span><br />
+                        <span class="meta">07:00 · Meißen · 3 Mann</span>
+                      </div>
+                      <span class="checks"><i class="i-gruen"></i><i class="i-gruen"></i><i class="i-gruen"></i>&nbsp;Zugang · Material · Vorgewerke</span>
+                    </div>
+                    <div class="dispatch dispatch--gelb">
+                      <div>
+                        <span class="who">Kolonne Petersen · Lindenhof 12, Fliesen EG</span><br />
+                        <span class="meta">07:30 · Dresden · 2 Mann</span>
+                      </div>
+                      <span class="checks"><i class="i-gruen"></i><i class="i-gruen"></i><i class="i-gelb"></i>&nbsp;Vorgewerk offen</span>
+                    </div>
+                    <div class="dispatch dispatch--rot">
+                      <div>
+                        <span class="who">Kolonne Krause · Fam. Werner, Badumbau</span><br />
+                        <span class="meta">08:00 · Radebeul · 2 Mann</span>
+                      </div>
+                      <span class="checks"><i class="i-rot"></i><i class="i-gruen"></i><i class="i-grau"></i>&nbsp;Zugang unbestätigt</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================== TRUST STRIP =========================== -->
+    <section class="trust">
+      <div class="container">
+        <p>Arbeitet neben Ihrer Software, ersetzt nichts.</p>
+        <div class="trust__logos">
+          <span>Craftboxx</span>
+          <span class="sep">·</span>
+          <span>Plancraft</span>
+          <span class="sep">·</span>
+          <span>ToolTime</span>
+          <span class="sep">·</span>
+          <span>Excel</span>
+          <span class="sep">·</span>
+          <span>WhatsApp</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================== FEATURES =========================== -->
+    <section class="features" id="funktionen">
+      <div class="container">
+        <div class="features__intro">
+          <p class="kicker">Vier Bausteine. Ein Ziel: keine vergebliche Anfahrt.</p>
+          <h2>Vom Ampel-Board bis zum Posteingang — alles, was zwischen Büro und Baustelle verloren geht.</h2>
+        </div>
+
+        <!-- Feature 1: Ampel-Board & Leerfahrten-Report -->
+        <div class="feature">
+          <div class="feature__copy">
+            <p class="kicker kicker--action">Ampel-Board &amp; Leerfahrten-Report</p>
+            <h3>Grün heißt fahren. Alles andere heißt: erst klären.</h3>
+            <p class="lead">
+              Für jeden Einsatz prüft BauAmpel drei Dinge, bevor die Kolonne
+              startet: Hat der Kunde den Zugang bestätigt? Ist das Material auf
+              der Baustelle? Sind die Vorgewerke fertig? Erst wenn alle drei
+              Lichter grün sind, steht der Einsatz auf „bereit".
+            </p>
+            <ul>
+              <li>
+                <span class="check">✓</span>
+                <span><strong>Zugangsbestätigung per Magic-Link.</strong> Der Kunde tippt einmal auf sein Handy — kein Login, keine App, kein Telefonat.</span>
+              </li>
+              <li>
+                <span class="check">✓</span>
+                <span><strong>Material- und Vorgewerke-Status</strong> pro Einsatz, gepflegt von Büro oder Kolonne — sichtbar für alle.</span>
+              </li>
+              <li>
+                <span class="check">✓</span>
+                <span><strong>Leerfahrten-Kostenreport:</strong> jede vergebliche Anfahrt wird erfasst und in Euro beziffert — nach Ursache, Kolonne und Monat.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="feature__visual" aria-hidden="true">
+            <div class="panel">
+              <div class="card">
+                <p class="card__label">Leerfahrten-Report · Juli</p>
+                <div class="report-row"><span>Vergebliche Anfahrten</span><span class="val bad tnum">17</span></div>
+                <div class="report-row"><span>Häufigste Ursache</span><span class="val">Zugang nicht bestätigt (9×)</span></div>
+                <div class="report-row"><span>Kosten (à ~250&nbsp;€)</span><span class="val bad tnum">4.250&nbsp;€</span></div>
+                <div class="report-row"><span>Vermieden durch Ampel-Check</span><span class="val ok tnum">11 Fahrten · 2.750&nbsp;€</span></div>
+              </div>
+              <div class="card">
+                <div class="dispatch dispatch--rot" style="border:0;border-left:4px solid var(--ampel-rot);padding:6px 10px;background:var(--navy-50)">
+                  <div>
+                    <span class="who" style="font-size:12.5px">Fam. Werner · Badumbau</span><br />
+                    <span class="meta" style="font-size:10.5px">Morgen 08:00 · Kolonne Krause</span>
+                  </div>
+                  <span class="chip chip--rot">Nicht bereit</span>
+                </div>
+                <p style="margin-top:10px;font-size:12px;color:var(--navy-600)">
+                  Zugang unbestätigt → Erinnerung per Magic-Link erneut gesendet, 17:42&nbsp;Uhr.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 2: Kolonnen-Bericht (flip) -->
+        <div class="feature feature--flip">
+          <div class="feature__copy">
+            <p class="kicker kicker--action">Kolonnen-Bericht vom Handy</p>
+            <h3>Der Bericht entsteht auf der Baustelle — nicht abends am Küchentisch.</h3>
+            <p class="lead">
+              Die Kolonne dokumentiert direkt vor Ort: erledigte LV-Positionen
+              antippen, Vorher-/Nachher-Fotos aufnehmen, kurz aufs Mikrofon
+              sprechen. Die KI strukturiert die Sprachnotiz zu einem sauberen
+              Bericht — fertig, bevor der Transporter vom Hof rollt.
+            </p>
+            <ul>
+              <li>
+                <span class="check">✓</span>
+                <span><strong>LV-Positionen abhaken</strong> statt Zettelwirtschaft — die Mengen landen direkt beim Projekt.</span>
+              </li>
+              <li>
+                <span class="check">✓</span>
+                <span><strong>Vorher-/Nachher-Fotos</strong> mit Zeitstempel — Ihre Absicherung bei Reklamationen.</span>
+              </li>
+              <li>
+                <span class="check">✓</span>
+                <span><strong>Sprachnotiz mit KI-Strukturierung:</strong> aus 40 Sekunden Freitext wird ein gegliederter Tagesbericht.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="feature__visual">
+            <div class="phone-wrap" aria-hidden="true">
+              <div class="phone">
+                <div class="phone__screen">
+                  <div class="phone__bar">Bericht · EFH Brandt, 9. Juli</div>
+                  <div class="phone__body">
+                    <div class="lv-row"><span class="pos">Pos. 4.1</span><span>Abwasserleitung DN 100 — 12 m</span><span class="chip chip--gruen">✓</span></div>
+                    <div class="lv-row"><span class="pos">Pos. 4.3</span><span>Wanddurchbruch — 2 Stk.</span><span class="chip chip--gruen">✓</span></div>
+                    <div class="lv-row"><span class="pos">Pos. 5.2</span><span>Rohmontage Waschtisch</span><span class="chip chip--gelb">teilw.</span></div>
+                    <div class="photo-grid">
+                      <div class="photo-ph" data-label="Vorher · 07:14"></div>
+                      <div class="photo-ph" data-label="Nachher · 15:38"></div>
+                    </div>
+                    <div class="voice">
+                      <span>🎙</span>
+                      <span class="wave">
+                        <i style="height:6px"></i><i style="height:12px"></i><i style="height:8px"></i><i style="height:14px"></i><i style="height:7px"></i><i style="height:11px"></i><i style="height:5px"></i><i style="height:13px"></i><i style="height:9px"></i>
+                      </span>
+                      <span>0:42 · KI strukturiert&hellip;</span>
+                    </div>
+                    <div style="border-radius:8px;background:var(--action-tint);border:1px solid rgba(0,82,204,0.2);padding:9px 11px;font-size:10.5px;color:var(--navy-700)">
+                      <strong style="color:var(--action)">KI-Entwurf:</strong> Rohinstallation EG abgeschlossen,
+                      Waschtisch OG wartet auf Trockenbau. Mehraufwand Durchbruch: 1,5&nbsp;h.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 3: Rechtssichere Antwortentwürfe -->
+        <div class="feature">
+          <div class="feature__copy">
+            <p class="kicker kicker--action">Antwortentwürfe für Mängelrügen &amp; Co.</p>
+            <h3>Auf jede Mängelrüge eine souveräne Antwort — in Minuten statt Tagen.</h3>
+            <p class="lead">
+              Mängelrüge, Behinderungsanzeige, Nachtragsankündigung: BauAmpel
+              schlägt Antworten auf Basis VOB/B-orientierter, anwaltlich
+              vorformulierter Textbausteine vor. Die KI füllt ausschließlich die
+              Fakten aus Ihrem Projekt ein — Fristen, Positionen, Fotos. Kein
+              Entwurf verlässt das Haus ohne Ihre Freigabe.
+            </p>
+            <ul>
+              <li>
+                <span class="check">✓</span>
+                <span><strong>Vorformulierte Textbausteine,</strong> orientiert an der VOB/B — die KI erfindet keine Rechtsauffassung, sie füllt Fakten ein.</span>
+              </li>
+              <li>
+                <span class="check">✓</span>
+                <span><strong>Freigabe-Pflicht:</strong> jeder Entwurf wird von einem Menschen geprüft und freigegeben. Immer.</span>
+              </li>
+              <li>
+                <span class="check">✓</span>
+                <span><strong>Belege automatisch angeheftet:</strong> Kolonnen-Berichte und Fotos aus dem Projekt stützen jede Antwort.</span>
+              </li>
+            </ul>
+            <p class="smallprint">
+              Hinweis: Die Textbausteine sind Beispieltexte und nicht anwaltlich
+              geprüft. BauAmpel erbringt keine Rechtsberatung — im Zweifel gehört
+              der Fall zu Ihrem Anwalt.
+            </p>
+          </div>
+          <div class="feature__visual" aria-hidden="true">
+            <div class="panel">
+              <div class="card">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+                  <p class="card__label">Eingegangen · Mängelrüge</p>
+                  <span class="chip chip--rot">Frist: 12 Tage</span>
+                </div>
+                <p style="margin-top:8px;font-size:13.5px;font-weight:600">GU Hoffmann Bau GmbH · BV Lindenhof</p>
+                <p style="margin-top:4px;font-size:12.5px;color:var(--navy-600)">„…rügen wir hiermit Mängel an den Fliesenarbeiten im EG gemäß §&nbsp;4 Abs.&nbsp;7 VOB/B…"</p>
+              </div>
+              <div class="card">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+                  <p class="card__label">Antwortentwurf · VOB/B-Baustein M-04</p>
+                  <span class="chip chip--gelb">Wartet auf Freigabe</span>
+                </div>
+                <div class="doc-line" style="width:92%"></div>
+                <div class="doc-line doc-line--fill" style="width:70%"></div>
+                <div class="doc-line" style="width:85%"></div>
+                <div class="doc-line doc-line--fill" style="width:55%"></div>
+                <div class="doc-line" style="width:78%"></div>
+                <p style="margin-top:12px;font-size:11.5px;color:var(--navy-500)">
+                  <span class="chip chip--blau">KI: Fakten eingefügt</span>&nbsp;
+                  <span class="chip chip--grau">2 Fotos angeheftet</span>
+                </p>
+                <div style="margin-top:12px;display:flex;gap:8px">
+                  <span class="chip chip--gruen" style="padding:6px 14px">Prüfen &amp; freigeben</span>
+                  <span class="chip chip--grau" style="padding:6px 14px">Verwerfen</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 4: Posteingang (flip) -->
+        <div class="feature feature--flip">
+          <div class="feature__copy">
+            <p class="kicker kicker--action">E-Mail-Posteingang</p>
+            <h3>Jede Mail landet automatisch am richtigen Projekt.</h3>
+            <p class="lead">
+              Bautagesberichte, Lieferavise, Nachfragen vom Auftraggeber — alles
+              kommt per E-Mail und versandet im Postfach. BauAmpel ordnet
+              eingehende Mails automatisch dem passenden Projekt und Einsatz zu
+              und aktualisiert die Ampel gleich mit: Lieferavis rein, Material
+              springt auf Grün.
+            </p>
+            <ul>
+              <li>
+                <span class="check">✓</span>
+                <span><strong>Automatische Zuordnung</strong> zu Projekt, Auftraggeber und Einsatz — ohne manuelles Einsortieren.</span>
+              </li>
+              <li>
+                <span class="check">✓</span>
+                <span><strong>Ampel-Wirkung inklusive:</strong> relevante Mails (Lieferung, Freigabe, Absage) schalten den Einsatz-Status um.</span>
+              </li>
+              <li>
+                <span class="check">✓</span>
+                <span><strong>Nichts geht verloren:</strong> Mängelrügen und Fristen werden erkannt und im Projekt sichtbar gemacht.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="feature__visual" aria-hidden="true">
+            <div class="panel">
+              <div class="card">
+                <p class="card__label">Posteingang · heute</p>
+                <div class="inbox-row">
+                  <div>
+                    <p class="subj">Lieferavis: Fliesen, KW&nbsp;28</p>
+                    <p class="from">baustoff-richter.de → BV Lindenhof</p>
+                  </div>
+                  <span class="chip chip--gruen">Material ✓</span>
+                </div>
+                <div class="inbox-row">
+                  <div>
+                    <p class="subj">Terminbestätigung Badumbau</p>
+                    <p class="from">m.werner@web.de → Einsatz Do 08:00</p>
+                  </div>
+                  <span class="chip chip--gruen">Zugang ✓</span>
+                </div>
+                <div class="inbox-row">
+                  <div>
+                    <p class="subj">Mängelrüge Fliesenarbeiten EG</p>
+                    <p class="from">hoffmann-bau.de → BV Lindenhof</p>
+                  </div>
+                  <span class="chip chip--rot">Reklamation</span>
+                </div>
+                <div class="inbox-row">
+                  <div>
+                    <p class="subj">Estrich-Freigabe verzögert sich</p>
+                    <p class="from">estrich-mueller.de → Einsatz Fr</p>
+                  </div>
+                  <span class="chip chip--gelb">Vorgewerk !</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================== ROI =========================== -->
+    <section class="roi" id="roi">
+      <div class="container roi__grid">
+        <div>
+          <p class="kicker">Die Rechnung</p>
+          <h2>Eine vermiedene Leerfahrt pro Woche ≈ 1.000&nbsp;€ im Monat.</h2>
+          <p class="roi__lead">
+            Eine vergebliche Anfahrt kostet schnell 250&nbsp;€ — Transporter,
+            zwei Mann Lohn, verlorene Stunden, verschobener Bauablauf. Die
+            meisten Betriebe haben mehrere davon pro Woche und sehen die Summe
+            nie schwarz auf weiß. BauAmpel macht sie sichtbar — und verhindert
+            die nächste, bevor die Kolonne den Hof verlässt.
+          </p>
+        </div>
+        <div class="roi__card">
+          <p class="card__label">Beispielrechnung · Betrieb mit 3 Kolonnen</p>
+          <div class="report-row"><span>Kosten pro Leerfahrt (konservativ)</span><span class="val tnum">~250&nbsp;€</span></div>
+          <div class="report-row"><span>Vermiedene Leerfahrten pro Woche</span><span class="val tnum">1</span></div>
+          <div class="report-row"><span>Ersparnis pro Monat</span><span class="val ok tnum">≈ 1.000&nbsp;€</span></div>
+          <div class="report-row"><span>Ersparnis pro Jahr</span><span class="val ok tnum">≈ 12.000&nbsp;€</span></div>
+          <p class="smallprint">
+            Konservativ gerechnet: nur eine vermiedene Fahrt pro Woche über alle
+            Kolonnen. Nicht eingerechnet: schnellere Antworten auf Mängelrügen,
+            weniger Abend-Schreibarbeit für die Kolonnen und sauber belegte
+            Berichte bei Streitfällen.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================== CTA =========================== -->
+    <section class="cta" id="kontakt">
+      <div class="container">
+        <p class="kicker">Selbst ausprobieren</p>
+        <h2>Sehen Sie Ihre Ampel, bevor die nächste Kolonne umsonst fährt.</h2>
+        <p class="lead">
+          Die Live-Sandbox ist das echte Produkt mit realistischen
+          Beispieldaten — klicken Sie sich durch, ohne Registrierung. Oder
+          fragen Sie direkt das Pilotprogramm für Ihren Betrieb an.
+        </p>
+        <div class="cta__buttons">
+          <a class="btn btn--action" href="#">
+            <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M4 2.5v9l7-4.5-7-4.5z" fill="currentColor"/></svg>
+            Live-Sandbox testen — ohne Registrierung
+          </a>
+          <a class="btn btn--outline-light" href="mailto:amid.fish@gmail.com?subject=BauAmpel%20Pilotprogramm">Pilotprogramm anfragen</a>
+        </div>
+        <p class="cta__note">Antwort innerhalb eines Werktags. Keine Newsletter, keine Verkaufsskripte.</p>
+      </div>
+    </section>
+
+    <!-- =========================== FOOTER =========================== -->
+    <footer>
+      <div class="container">
+        <div class="footer__grid">
+          <div class="footer__left">
+            <span class="brand brand--footer">
+              <svg width="22" height="22" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+                <circle cx="14" cy="5.5" r="3.4" fill="#E5484D" />
+                <circle cx="14" cy="14" r="3.4" fill="#F5A623" />
+                <circle cx="14" cy="22.5" r="3.4" fill="#30A46C" />
+              </svg>
+              <span class="brand__word">Bau<em>Ampel</em></span>
+            </span>
+            <p>
+              Einsatz-Koordination für Bauunternehmen und Handwerksbetriebe in
+              der DACH-Region. Arbeitet neben Ihrer bestehenden Software.
+            </p>
+          </div>
+          <nav class="footer__links" aria-label="Rechtliches">
+            <a href="#">Impressum</a>
+            <a href="#">Datenschutz</a>
+            <a href="mailto:amid.fish@gmail.com">Kontakt</a>
+          </nav>
+        </div>
+        <div class="footer__legal">
+          <p>BauAmpel © 2026</p>
+          <p>Textbausteine sind Beispieltexte, keine Rechtsberatung.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
